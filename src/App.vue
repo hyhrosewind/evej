@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-    <MainNavBar/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import MainNavBar from 'components/content/mainnavbar/mainNavBar'
+// import Home from 'views/home/Home'
+
 export default {
   name: 'app',
-  components: {
-    MainNavBar
-  }
 }
 </script>
 
 <style>
-@import "assets/css/base.css";
+@import 'assets/css/base.css';
 </style>
