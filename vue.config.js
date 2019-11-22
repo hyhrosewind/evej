@@ -6,8 +6,14 @@ module.exports = {
         'common': '@/common',
         'components': '@/components',
         'network': '@/network',
-        'views': '@/views'
+        'views': '@/views',
+        'utils': '@/utils'
       }
     }
+  },
+  devServer: {
+    open: true,
+    host: '0.0.0.0',
+    port: 8810
   }
 }

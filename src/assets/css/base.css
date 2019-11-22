@@ -4,7 +4,7 @@
   --color-text: rgba(255, 255, 255, .7);
   --color-high-text: rgba(122, 113, 173,.8);
   --color-tint: #fff;
-  --color-background: rgba(247, 241, 241, 0.7);
+  --color-background: #fff;
   --font-size: 14px;
   --line-height: 1.5;
 }

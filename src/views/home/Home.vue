@@ -1,14 +1,10 @@
 <template>
   <div class="dashboard">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header><headNavBar/></el-header>
       <el-container>
-        <el-aside width="160px">
-          <leftNavBar/>
-        </el-aside>
-        <el-main>Main
-          <twoDimension/>
-        </el-main>
+        <el-aside width="160px"><leftNavBar/></el-aside>
+        <el-main><router-view/></el-main>
       </el-container>
     </el-container>
   </div>
@@ -16,14 +12,13 @@
 
 <script>
 import leftNavBar from 'components/content/leftnavbar/leftNavBar'
-
-import twoDimension from 'views/nav1/TwoDimension'
+import headNavBar from 'components/content/headnavbar/headNavBar'
 
 export default {
   name: 'Home',
   components: {
     leftNavBar,
-    twoDimension
+    headNavBar
   }
 }
 </script>
@@ -31,27 +26,32 @@ export default {
 <style scoped>
 
   .dashboard {
-    height: 625px;
+    margin: 0px;
+    padding: 0px;
   }
 
   .el-header {
-    text-align: center;
-    line-height: 60px;
-    background: rgba(45,26,107,.2)
+    height: 60px;
+    margin: 0px;
+    padding: 0px;
+    border:2px solid rgba(62,63,99,.2);
   }
   
   .el-aside {
     color: #333;
     text-align: center;
     line-height: 20px;
-    background: rgba(38, 20, 95, 0.3)
+    padding-top: 10px;
+    border:2px solid rgba(62,63,99,.2);
+    border-radius: 10px;
+    margin-top: -2px;
   }
   
   .el-main {
     color: #333;
     text-align: center;
     line-height: 20px;
-    background: rgba(45,26,107,.4)
+    /* background: rgba(45,26,107,.4) */
   }
 
 </style>

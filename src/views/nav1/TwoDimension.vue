@@ -1,6 +1,8 @@
 <!--柱状图 - 指数回归-->
 <template>
-   <div id="Chart" class='Chart'></div>
+  <div class="echartInfo">
+    <div id="Chart" class='Chart'></div>
+  </div>
 </template>
 
 <script>
@@ -16,14 +18,8 @@ export default {
     drawLine () {
       let myChart = this.$echarts.init(document.getElementById('Chart'))
       myChart.setOption({
-        textStyle: {
-          color: 'rgba(255, 255, 255, 0.6)'
-        },
         title: {
           text: '某地区蒸发量和降水量',
-          textStyle: {
-            color: 'rgba(255, 255, 255, 0.6)'
-          }
         },
         tooltip: {
           trigger: 'axis'
@@ -97,9 +93,13 @@ export default {
 </script>
 
 <style scoped>
+.echartInfo {
+  width: 480px;
+  height: 450px;
+}
 .Chart {
   width: 550px;
-  height: 450px;
+  height: 470px;
   margin-left: 200px;
   margin-top: 20px;
 }

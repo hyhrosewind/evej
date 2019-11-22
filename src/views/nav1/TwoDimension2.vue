@@ -1,6 +1,8 @@
 <!--散点图-->
 <template>
-   <div id="Chart3" class='Chart3'></div>
+  <div class="echartInfo">
+    <div id="Chart3" class='Chart3'></div>
+  </div>
 </template>
 
 <script>
@@ -13,9 +15,6 @@ export default {
     drawLine () {
       let myChart = this.$echarts.init(document.getElementById('Chart3'))
       myChart.setOption({
-        textStyle: {
-          color: 'rgba(255, 255, 255, 0.6)'
-        },
         tooltip: {
           trigger: 'axis',
           axisPointer: { // 坐标轴指示器，坐标轴触发有效
@@ -24,9 +23,6 @@ export default {
         },
         legend: {
           data: ['利润', '支出', '收入'],
-          textStyle: {
-            color: 'rgba(255, 255, 255, 0.6)'
-          }
         },
         grid: {
           left: '3%',
@@ -89,10 +85,14 @@ export default {
 </script>
 
 <style scoped>
+.echartInfo {
+  width: 480px;
+  height: 450px;
+}
 .Chart3 {
-  width: 450px;
-  height: 300px;
+  width: 560px;
+  height: 400px;
   margin-left: 150px;
-  margin-top: 70px;
+  margin-top: 20px;
 }
 </style>
