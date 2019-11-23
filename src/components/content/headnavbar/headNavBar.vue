@@ -1,7 +1,7 @@
 <template>
   <div class="head-nav">
     <div class="head-logo">
-      <img src="../../../assets/img/logo/evej.png" style="width: 55px; height: 55px; "/>
+      <img src="../../../assets/img/logo/evej.png" style="width: 40px; height: 40px; "/>
     </div>
     <div class="head-title">
       <h2>数据可视化</h2>
@@ -58,7 +58,7 @@ export default {
 
 .head-logo {
   position: absolute;
-  margin-top: -12px;
+  margin-top: -5px;
 }
 
 .head-title {
@@ -69,16 +69,16 @@ export default {
 
 .to-github {
   position: absolute;
-  margin-left: 1170px;
+  margin-left: 1175px;
   padding: 2px;
 }
 
 .userinfo {
   position: relative;
-  padding: 0px;
+  padding: 2px;
   width: 45px;
   height: 45px;
-  margin-left: 1260px;
+  margin-left: 1225px;
 }
 
 </style>

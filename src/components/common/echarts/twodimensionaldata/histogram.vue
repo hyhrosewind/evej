@@ -1,13 +1,21 @@
-<!--柱状图 - 指数回归-->
+<!--  柱状图  -->
 <template>
-  <div class="echartInfo">
-    <div id="Chart" class='Chart'></div>
-  </div>
+  <div id="histogram" class='histogram' :style="{width: chart_width + 'px', height: chart_height + 'px'}"></div>
 </template>
 
 <script>
 export default {
-  name: 'twoDimension',
+  name: 'histogram',
+  props: {
+    chart_width: {
+      type: Number,
+      default: 520
+    },
+    chart_height: {
+      type: Number,
+      default: 470
+    },
+  },
   mounted () {
     this.drawLine()
   },
@@ -16,10 +24,13 @@ export default {
       return Math.round(Math.random()*200);
     },
     drawLine () {
-      let myChart = this.$echarts.init(document.getElementById('Chart'))
+      let myChart = this.$echarts.init(document.getElementById('histogram'))
       myChart.setOption({
         title: {
           text: '某地区蒸发量和降水量',
+          textStyle: {
+            fontSize: 14
+          }
         },
         tooltip: {
           trigger: 'axis'
@@ -93,14 +104,7 @@ export default {
 </script>
 
 <style scoped>
-.echartInfo {
-  width: 480px;
-  height: 450px;
-}
-.Chart {
-  width: 550px;
-  height: 470px;
-  margin-left: 200px;
-  margin-top: 20px;
+.histogram {
+  margin:0 auto;
 }
 </style>

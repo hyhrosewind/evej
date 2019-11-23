@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import {Container,Header,Aside,Main,RadioGroup,RadioButton,Menu,Submenu,
-  MenuItem,Tooltip,Dropdown,DropdownMenu,DropdownItem} from 'element-ui'
+  MenuItem,Tooltip,Dropdown,DropdownMenu,DropdownItem,Row,Col,PageHeader} from 'element-ui'
 
 Vue.use(Container)
 Vue.use(Header)
@@ -15,3 +15,6 @@ Vue.use(Tooltip)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(PageHeader)

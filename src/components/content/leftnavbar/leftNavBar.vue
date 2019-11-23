@@ -7,60 +7,61 @@
       </el-radio-group>
     </div>
     <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse">
-      <el-menu-item index="1">
-        <img src="../../../assets/img/dashboard/echarts-gauge.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
-        <span>导航首页</span>
+
+      <el-menu-item index="1" @click="changeView(1)">
+        <img src="../../../assets/img/dashboard/echarts-gauge.png" 
+        style="width: 20px; height: 20px; margin-right: 10px;"/>
+        <span>首页概览</span>
       </el-menu-item>
+
       <el-submenu index="2">
         <template slot="title">
-          <img src="../../../assets/img/dimensionality/dimensionality.png"  style="width: 20px; height: 20px; margin-right: 10px;"/>
+          <img src="../../../assets/img/data-structure/twoDimensionalData.png"  
+          style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">二维数据</span>
         </template>
-        <el-menu-item index="2-1" @click="changeView(1)">
-          <img src="../../../assets/img/echarts/echarts-histogram.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+        <el-menu-item index="2-1" @click="changeView(2)">
+          <img src="../../../assets/img/echarts/echarts-histogram.png" 
+          style="width: 20px; height: 20px; margin-right: 10px;"/>
           柱状图</el-menu-item>
-        <el-menu-item index="2-2" @click="changeView(2)">
-           <img src="../../../assets/img/echarts/echarts-scatter.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
-          散点图</el-menu-item>
-        <el-menu-item index="2-3" @click="changeView(3)">
-           <img src="../../../assets/img/echarts/echarts-line.png" style="width: 20px; height: 20px; margin-right: 10px;"/>折线图</el-menu-item>
+        <el-menu-item index="2-2" @click="changeView(3)">
+           <img src="../../../assets/img/echarts/echarts-line.png" 
+           style="width: 20px; height: 20px; margin-right: 10px;"/>折线图</el-menu-item>
       </el-submenu>
+
       <el-submenu index="3">
         <template slot="title">
-          <img src="../../../assets/img/dimensionality/dimensionality.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+          <img src="../../../assets/img/data-structure/d-SpatialData.png" 
+          style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">三维数据</span>
         </template>
-        <el-menu-item index="3-1" @click="changeView(4)">柱状图</el-menu-item>
-        <el-menu-item index="3-2" @click="changeView(5)">散点图</el-menu-item>
-        <el-menu-item index="3-3" @click="changeView(6)">折线图</el-menu-item>
+        <el-menu-item index="3-1" @click="changeView(4)">
+           <img src="../../../assets/img/echarts/echarts-scatter.png" 
+           style="width: 20px; height: 20px; margin-right: 10px;"/>
+          散点图</el-menu-item>
       </el-submenu>
+
       <el-submenu index="4">
         <template slot="title">
-          <img src="../../../assets/img/dimensionality/dimensionality.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+          <img src="../../../assets/img/data-structure/multidimensionalData.png" style="width: 23px; height: 15px; margin-right: 10px;"/>
           <span slot="title">多维数据</span>
         </template>
-        <el-menu-item index="4-1" @click="changeView">柱状图</el-menu-item>
-        <el-menu-item index="4-2" @click="changeView">散点图</el-menu-item>
-        <el-menu-item index="4-3" @click="changeView">折线图</el-menu-item>
       </el-submenu>
+
       <el-submenu index="5">
         <template slot="title">
-          <img src="../../../assets/img/dimensionality/dimensionality.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+          <img src="../../../assets/img/data-structure/gridData.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">网格数据</span>
         </template>
-        <el-menu-item index="5-1" @click="changeView">柱状图</el-menu-item>
-        <el-menu-item index="5-2" @click="changeView">散点图</el-menu-item>
-        <el-menu-item index="5-3" @click="changeView">折线图</el-menu-item>
       </el-submenu>
+
       <el-submenu index="6">
         <template slot="title">
-          <img src="../../../assets/img/dimensionality/dimensionality.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+          <img src="../../../assets/img/data-structure/hierarchicalData.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">层次数据</span>
         </template>
-        <el-menu-item index="6-1" @click="changeView">柱状图</el-menu-item>
-        <el-menu-item index="6-2" @click="changeView">散点图</el-menu-item>
-        <el-menu-item index="6-3" @click="changeView">折线图</el-menu-item>
       </el-submenu>
+      
     </el-menu>
   </div>
 </template>
@@ -76,12 +77,11 @@ export default {
   },
   methods: {
     changeView (index) {
-      if(index==1) this.$router.replace("/TwoDimension")
-      else if(index==2) this.$router.replace("/TwoDimension2")
-      else if(index==3) this.$router.replace("/TwoDimension3")
+      if(index==1) this.$router.push('/Overview')
+      else if(index==2) this.$router.push('/EchartsHistogram')
+      else if(index==3) this.$router.push('/EchartsLine')
+      else if(index==4) this.$router.push('/EchartsScatter')
     }
-  },
-  components: {
   }
 }
 </script>

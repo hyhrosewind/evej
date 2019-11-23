@@ -4,7 +4,10 @@
       <el-header><headNavBar/></el-header>
       <el-container>
         <el-aside width="160px"><leftNavBar/></el-aside>
-        <el-main><router-view/></el-main>
+        <el-main>
+          <pageHeader :detail="this.$route.name"/>
+          <router-view/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -13,12 +16,14 @@
 <script>
 import leftNavBar from 'components/content/leftnavbar/leftNavBar'
 import headNavBar from 'components/content/headnavbar/headNavBar'
+import pageHeader from 'components/content/pageheader/pageHeader'
 
 export default {
   name: 'Home',
   components: {
     leftNavBar,
-    headNavBar
+    headNavBar,
+    pageHeader
   }
 }
 </script>
@@ -40,7 +45,6 @@ export default {
   .el-aside {
     color: #333;
     text-align: center;
-    line-height: 20px;
     padding-top: 10px;
     border:2px solid rgba(62,63,99,.2);
     border-radius: 10px;
@@ -48,10 +52,10 @@ export default {
   }
   
   .el-main {
+    margin: 0px;
+    padding: 20px;
     color: #333;
     text-align: center;
-    line-height: 20px;
-    /* background: rgba(45,26,107,.4) */
   }
 
 </style>

@@ -1,31 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const TwoDimension = () => import('views/nav1/TwoDimension')
-const TwoDimension2 = () => import('views/nav1/TwoDimension2')
-const TwoDimension3 = () => import('views/nav1/TwoDimension3')
+const Overview = () => import('views/overview/Overview')
+
+const EchartsHistogram = () => import('views/twodimensionaldata/EchartsHistogram')
+const EchartsLine = () => import('views/twodimensionaldata/EchartsLine')
+
+const EchartsScatter = () => import('views/dspatialData/EchartsScatter')
 
 Vue.use(Router)
 
 const routes = [
   {
     path: '',
-    redirect: '/TwoDimension'
+    redirect: '/Overview'
   },
   {
-    path: '/TwoDimension',
-    name: 'twoDimension',
-    component: TwoDimension,
+    path: '/Overview',
+    name: '首页概览',
+    component: Overview,
   },
   {
-    path: '/TwoDimension2',
-    name: 'twoDimension2',
-    component: TwoDimension2,
+    path: '/EchartsHistogram',
+    name: '柱状图',
+    component: EchartsHistogram,
   },
   {
-    path: '/TwoDimension3',
-    name: 'twoDimension3',
-    component: TwoDimension3,
+    path: '/EchartsScatter',
+    name: '散点图',
+    component: EchartsScatter,
+  },
+  {
+    path: '/EchartsLine',
+    name: '折线图',
+    component: EchartsLine,
   }
 ]
 
