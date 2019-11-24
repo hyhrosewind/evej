@@ -7,7 +7,7 @@ const EchartsHistogram = () => import('views/twodimensionaldata/EchartsHistogram
 const EchartsLine = () => import('views/twodimensionaldata/EchartsLine')
 const EchartsPie = () => import('views/twodimensionaldata/EchartsPie')
 
-const EchartsScatter = () => import('views/dspatialData/EchartsScatter')
+const EchartsScatter = () => import('views/dspatialdata/EchartsScatter')
 
 const EchartsRadar = () => import('views/multidimensionaldata/EchartsRadar')
 
