@@ -1,18 +1,18 @@
-<!--  三维数据 散点图  -->
+<!--  多维数据 雷达图 -->
 <template>
   <div class="echartInfo">
-    <scatter/>
+    <radarMap/>
   </div>
 </template>
 
 <script>
 
-import scatter from 'components/common/echarts/dspatialdata/scatter'
+import radarMap from 'components/common/echarts/multidimensionaldata/radarMap'
 
 export default {
-  name: 'EchartsScatter',
+  name: 'EchartsRadar',
   components: {
-    scatter
+    radarMap
   }
 }
 </script>

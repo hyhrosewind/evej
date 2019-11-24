@@ -1,18 +1,18 @@
-<!--  三维数据 散点图  -->
+<!--  层次数据 旭日图  -->
 <template>
   <div class="echartInfo">
-    <scatter/>
+    <sunburst/>
   </div>
 </template>
 
 <script>
 
-import scatter from 'components/common/echarts/dspatialdata/scatter'
+import sunburst from 'components/common/echarts/hierarchicaldata/sunburst'
 
 export default {
-  name: 'EchartsScatter',
+  name: 'EchartsSunburst',
   components: {
-    scatter
+    sunburst
   }
 }
 </script>

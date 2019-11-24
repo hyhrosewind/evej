@@ -16,9 +16,37 @@
     </el-row>
     <el-row :gutter="16">
       <el-col :span="11">
+        <h5>二维数据 饼图</h5>
+        <div class="grid-content bg-purple">
+          <pieGraph :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
+      <el-col :span="11">
         <h5>三维数据 散点图</h5>
         <div class="grid-content bg-purple">
           <scatter :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="16">
+      <el-col :span="11">
+        <h5>三维数据 地图</h5>
+        <div class="grid-content bg-purple">
+          <mapGraph :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
+      <el-col :span="11">
+        <h5>多维数据 雷达图</h5>
+        <div class="grid-content bg-purple">
+          <radarMap :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="16">
+      <el-col :span="11">
+        <h5>层次数据 旭日图</h5>
+        <div class="grid-content bg-purple">
+          <sunburst :chart_width="450" :chart_height="375"/>
         </div>
       </el-col>
     </el-row>
@@ -29,15 +57,25 @@
 
 import histogram from 'components/common/echarts/twodimensionaldata/histogram'
 import lineGraph from 'components/common/echarts/twodimensionaldata/lineGraph'
+import pieGraph from 'components/common/echarts/twodimensionaldata/pieGraph'
 
-import scatter from 'components/common/echarts/dspatialData/scatter'
+import scatter from 'components/common/echarts/dspatialdata/scatter'
+import mapGraph from 'components/common/echarts/dspatialdata/mapGraph'
+
+import radarMap from 'components/common/echarts/multidimensionaldata/radarMap'
+
+import sunburst from 'components/common/echarts/hierarchicaldata/sunburst'
 
 export default {
   name: 'overview',
   components: {
     histogram,
+    lineGraph,
+    pieGraph,
     scatter,
-    lineGraph
+    mapGraph,
+    radarMap,
+    sunburst
   }
 }
 </script>

@@ -1,18 +1,18 @@
-<!--  三维数据 散点图  -->
+<!--  二维数据 饼图 -->
 <template>
   <div class="echartInfo">
-    <scatter/>
+    <pieGraph/>
   </div>
 </template>
 
 <script>
 
-import scatter from 'components/common/echarts/dspatialdata/scatter'
+import pieGraph from 'components/common/echarts/twodimensionaldata/pieGraph'
 
 export default {
-  name: 'EchartsScatter',
+  name: 'EchartsPie',
   components: {
-    scatter
+    pieGraph
   }
 }
 </script>

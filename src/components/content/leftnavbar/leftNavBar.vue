@@ -25,8 +25,13 @@
           style="width: 20px; height: 20px; margin-right: 10px;"/>
           柱状图</el-menu-item>
         <el-menu-item index="2-2" @click="changeView(3)">
-           <img src="../../../assets/img/echarts/echarts-line.png" 
-           style="width: 20px; height: 20px; margin-right: 10px;"/>折线图</el-menu-item>
+          <img src="../../../assets/img/echarts/echarts-line.png" 
+          style="width: 20px; height: 20px; margin-right: 10px;"/>折线图
+        </el-menu-item>
+        <el-menu-item index="2-3" @click="changeView(4)">
+          <img src="../../../assets/img/echarts/echarts-pie.png" 
+          style="width: 25px; height: 25px; margin-right: 10px;"/>饼 图
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="3">
@@ -35,10 +40,16 @@
           style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">三维数据</span>
         </template>
-        <el-menu-item index="3-1" @click="changeView(4)">
+        <el-menu-item index="3-1" @click="changeView(5)">
            <img src="../../../assets/img/echarts/echarts-scatter.png" 
            style="width: 20px; height: 20px; margin-right: 10px;"/>
-          散点图</el-menu-item>
+          散点图
+        </el-menu-item>
+        <el-menu-item index="3-1" @click="changeView(6)">
+           <img src="../../../assets/img/echarts/echarts-map.png" 
+           style="width: 20px; height: 20px; margin-right: 10px;"/>
+          地理图
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="4">
@@ -46,6 +57,11 @@
           <img src="../../../assets/img/data-structure/multidimensionalData.png" style="width: 23px; height: 15px; margin-right: 10px;"/>
           <span slot="title">多维数据</span>
         </template>
+         <el-menu-item index="3-1" @click="changeView(7)">
+           <img src="../../../assets/img/echarts/echarts-radar.png" 
+           style="width: 25px; height: 25px; margin-right: 10px;"/>
+          雷达图
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="5">
@@ -60,6 +76,11 @@
           <img src="../../../assets/img/data-structure/hierarchicalData.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">层次数据</span>
         </template>
+        <el-menu-item index="3-1" @click="changeView(9)">
+           <img src="../../../assets/img/echarts/echarts-sunburst.png" 
+           style="width: 25px; height: 25px; margin-right: 10px;"/>
+           旭日图
+        </el-menu-item>
       </el-submenu>
       
     </el-menu>
@@ -77,10 +98,13 @@ export default {
   },
   methods: {
     changeView (index) {
-      if(index==1) this.$router.push('/Overview')
+      if(index==1) {this.$router.push('/Overview')}
       else if(index==2) this.$router.push('/EchartsHistogram')
       else if(index==3) this.$router.push('/EchartsLine')
-      else if(index==4) this.$router.push('/EchartsScatter')
+      else if(index==4) this.$router.push('/EchartsPie')
+      else if(index==5) this.$router.push('/EchartsScatter')
+      else if(index==7) this.$router.push('/EchartsRadar')
+      else if(index==9) this.$router.push('/EchartsSunburst')
     }
   }
 }
