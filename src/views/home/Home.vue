@@ -39,14 +39,15 @@ export default {
     height: 60px;
     margin: 0px;
     padding: 0px;
-    border:2px solid rgba(62,63,99,.2);
+    border: 1px solid rgba(62,63,99,.08);
+    background: rgba(62,63,99,.04);
   }
   
   .el-aside {
     color: #333;
     text-align: center;
     padding-top: 10px;
-    border:2px solid rgba(62,63,99,.2);
+    border-right: 1px solid rgba(62,63,99,.2);
     border-radius: 10px;
     margin-top: -2px;
   }

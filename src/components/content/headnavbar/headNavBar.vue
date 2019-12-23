@@ -4,7 +4,7 @@
       <img src="../../../assets/img/logo/evej.png" style="width: 40px; height: 40px; "/>
     </div>
     <div class="head-title">
-      <h2>数据可视化</h2>
+      <h2>数据可视化平台</h2>
     </div>
     <div class="to-github">
       <el-tooltip class="item" effect="dark" content="访问github" placement="top">
@@ -26,7 +26,6 @@
               <el-dropdown-item>logout</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>Tom</span>
         </el-header>
       </el-container>
     </div>

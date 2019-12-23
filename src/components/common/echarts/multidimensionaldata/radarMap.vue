@@ -28,6 +28,9 @@ export default {
       myChart.setOption({
     title: {
         text: '浏览器占比变化',
+        textStyle: {
+          fontSize: 14
+        },
         subtext: '纯属虚构',
         top: 10,
         left: 10
