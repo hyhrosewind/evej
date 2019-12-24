@@ -32,6 +32,7 @@ export default {
   },
   watch: {
     selected(val) {
+      this.$store.state.selectedSheet = val.sheet
       if(this.$store.state.excelDimension!=''){
         this.$store.state.excelDimension.splice(0, this.$store.state.excelDimension.length)
       }

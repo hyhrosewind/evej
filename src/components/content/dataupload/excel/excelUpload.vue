@@ -1,7 +1,7 @@
 <template>
   <div class="excel_upload">
     <el-upload class="load-excel" drag action="https://jsonplaceholder.typicode.com/posts/"
-    accept=".xls,.xlsx"
+    accept=".xls,.xlsx,.txt"
     :on-preview="handlePreview" 
     :on-remove="handleRemove" 
     :on-success="handleSuccess"
@@ -38,17 +38,43 @@ export default {
       console.log("loading ---- handleSuccess ----",response,file,fileList)
       this.$message({message: "数据集加载完毕",type: 'success'})
 
-      this.$store.state.excelName = fileList[0].name
-      this.uploadflag = true
-      this.$emit('uploadSuccess',this.uploadflag)
+      if(fileList[0].name.split(".")[1]=="txt"){
+        var xAxis=[],yAxis=[]
+        this.$store.state.excelName = fileList[0].name
+        let resultFile = fileList[0]
+        console.log(fileList[0].name,resultFile)
 
-      this.file2Xce(fileList[0]).then(tabJson =>{
-        if(tabJson && tabJson.length >0){
-          this.xlsxJson = tabJson
-          this.$store.state.excelData = this.xlsxJson
-          console.log('loading ---- 数据 ----',this.xlsxJson)
+        if(resultFile){
+          let reader = new FileReader()
+          reader.readAsText(resultFile.raw, 'UTF-8')
+           reader.onload = function(e) {
+             var fileContent = e.target.result
+             console.log(fileContent.toString())
+             var jsarr = JSON.parse(fileContent)
+            
+             for (var i = 0; i < jsarr.product.length; i++) {
+               xAxis[i] = jsarr.product[i].name
+               yAxis[i] = jsarr.product[i].num
+              }
+           }
         }
-      })
+        this.$store.state.dataDimensions = xAxis
+        this.$store.state.dataNumericals = yAxis
+      }
+
+      if((fileList[0].name.split(".")[1]=='xlsx')||(fileList[0].name.split(".")[1]=="xls")){
+        this.$store.state.excelName = fileList[0].name
+        this.uploadflag = true
+        this.$emit('uploadSuccess',this.uploadflag)
+
+        this.file2Xce(fileList[0]).then(tabJson =>{
+          if(tabJson && tabJson.length >0){
+            this.xlsxJson = tabJson
+            this.$store.state.excelData = this.xlsxJson
+            console.log('loading ---- 数据 ----',this.xlsxJson)
+          }
+        })
+      }
     },
     file2Xce(file) {
       return new Promise(function(resolve){

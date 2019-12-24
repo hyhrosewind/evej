@@ -8,8 +8,13 @@ const store = new Vuex.Store({
     excelName: String,
     excelData: [],
     excelDataSelected: [],
+    selectedSheet: [],
     excelDimension: [],
-    excelNumerical: []
+    excelNumerical: [],
+    selectedDimensions: [],
+    selectedNumericals: [],
+    dataDimensions: [],
+    dataNumericals: []
   },
   mutations: {},
   actions: {},

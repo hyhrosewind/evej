@@ -40,7 +40,7 @@ export default {
     margin: 0px;
     padding: 0px;
     border: 1px solid rgba(62,63,99,.08);
-    background: rgba(62,63,99,.04);
+    background: rgba(62,63,99,.1);
   }
   
   .el-aside {

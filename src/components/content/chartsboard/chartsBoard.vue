@@ -6,7 +6,10 @@
       </el-header>
       <el-container>
         <el-aside width="180px"><leftAside/></el-aside>
-        <el-main><mainTable/><mainCharts/></el-main>
+        <el-main>
+          <mainTable @uploadCharts="handleCharts"/>
+          <mainCharts :drawFlag="drawFlag"/>
+        </el-main>
         <el-aside style=" width: 180px; margin-left: 980px; ">
           <rightAside/>
         </el-aside>
@@ -25,9 +28,17 @@ import rightAside from 'components/content/chartsboard/rightaside/rightAside'
 
 export default {
   name: 'chartsBoard',
+  data() {
+    return {
+      drawFlag: false
+    }
+  },
   methods: {
     handleChartsShow(chart_show) {
       this.$emit('chartVisible',chart_show)
+    },
+    handleCharts() {
+      this.drawFlag = true
     }
   },
   components: {

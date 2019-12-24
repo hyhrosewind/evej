@@ -6,6 +6,12 @@
 <script>
 export default {
   name: 'histogram',
+  data() {
+    return {
+      x: this.$store.state.dataDimensions,
+      y: this.$store.state.dataNumericals
+    }
+  },
   props: {
     chart_width: {
       type: Number,
@@ -15,88 +21,63 @@ export default {
       type: Number,
       default: 470
     },
+    x_data: {
+      type: Array,
+      default: () => {
+        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      }
+    },
+    series_data: {
+      type: Array,
+      default: () => {
+        return [10, 52, 200, 334, 390, 330, 220]
+      }
+    }
   },
   mounted () {
-    this.drawLine()
+    this.init()
+  },
+  watch: {
   },
   methods: {
-    randomData() {
-      return Math.round(Math.random()*200);
-    },
-    drawLine () {
-      let myChart = this.$echarts.init(document.getElementById('histogram'))
+    init() {
+      let myChart  = this.$echarts.init(document.getElementById('histogram'))
       myChart.setOption({
-        title: {
-          text: '某地区蒸发量和降水量',
-          textStyle: {
-            fontSize: 14
-          }
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-          data: ['蒸发量', '降水量']
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore: {show: true},
-            saveAsImage: {show: true}
-          }
-        },
-        calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: '蒸发量',
-            type: 'bar',
-            data: [this.randomData(), this.randomData(), this.randomData(),
-            this.randomData(), this.randomData(), this.randomData(), this.randomData(),
-            this.randomData(), this.randomData(), this.randomData(), this.randomData(), this.randomData()],
-            markPoint: {
-              data: [
-                {type: 'max', name: '最大值'},
-                {type: 'min', name: '最小值'}
-              ]
-            },
-            markLine: {
-              data: [
-                {type: 'average', name: '平均值'}
-              ]
+        color: ['	rgba(0,84,255,.5)'],
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : this.x,
+            axisTick: {
+                alignWithLabel: true
             }
-          },
-          {
-            name: '降水量',
-            type: 'bar',
-            data: [this.randomData(), this.randomData(), this.randomData(),
-            this.randomData(), this.randomData(), this.randomData(), this.randomData(),
-            this.randomData(), this.randomData(), this.randomData(), this.randomData(), this.randomData()],
-            markPoint: {
-              data: [
-                {name: '年最高', value: 182.2, xAxis: 7, yAxis: 183},
-                {name: '年最低', value: 2.3, xAxis: 11, yAxis: 3}
-              ]
-            },
-            markLine: {
-              data: [
-                {type: 'average', name: '平均值'}
-              ]
-            }
-          }
-        ]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'直接访问',
+            type:'bar',
+            barWidth: '60%',
+            data: this.y
+        }
+    ]
       })
     }
   }

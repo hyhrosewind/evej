@@ -3,8 +3,10 @@
     <div class="title"><span>数值</span></div>
     <div class="divide"></div>
     <div class="numberical">
-      <draggable>
-        <div v-for="index in $store.state.excelNumerical" :key="index" style="margin-bottom: 10px; ">
+      <draggable class="dragArea" 
+      :group="{ name: 'numericals', pull: 'clone'}">
+        <div v-for="index in $store.state.excelNumerical" :key="index" 
+        style="margin-bottom: 10px; width: 75px; ">
           <div>
             <img src="../../../../../assets/img/chartanalysis/numerical.png" 
             style="width: 26px; height: 20px; position: absolute; margin-top: 1px; "/>

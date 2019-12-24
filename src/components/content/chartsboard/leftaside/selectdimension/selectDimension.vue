@@ -4,14 +4,14 @@
     <div class="divide"></div>
     <div class="dimension">
       <draggable class="dragArea" 
-      :group="{ name: 'dimensions' , pull: 'clone'}">
+      :group="{ name: 'dimensions', pull: 'clone'}">
         <div v-for="index in $store.state.excelDimension" :key="index" 
-        style="margin-bottom: 10px; width: 100px; ">
+        style="margin-bottom: 10px; width: 75px; ">
           <div class="img-div">
             <img src="../../../../../assets/img/chartanalysis/dimensions.png"
             style="width: 22px; height: 20px; position: absolute; margin-top: 1px;"/>
           </div>
-          <div>
+          <div class="tag_div">
             <el-tag style="margin-left: 33px; "
             size="small">{{index}}</el-tag>
           </div>
@@ -31,6 +31,9 @@ export default {
     }
   },
   methods: {
+    handleTags(evt){
+      console.log(evt.draggedContext.index.name)
+    }
   },
   components: {
     draggable
