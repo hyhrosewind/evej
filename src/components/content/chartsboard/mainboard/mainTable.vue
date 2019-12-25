@@ -84,7 +84,9 @@ export default {
       this.$store.state.selectedNumericals.push(evt.item.innerText)
     },
     drawCharts() {
-      this.$emit('uploadCharts')
+      if(this.$store.state.selectedDimensions!=''&&this.$store.state.selectedNumericals!=''){
+        this.$emit('uploadCharts')
+      }
     }
   },
   components: {

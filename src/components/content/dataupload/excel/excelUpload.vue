@@ -9,9 +9,9 @@
     :limit="1" :on-exceed="handleExceed"
     :file-list="fileList"
     multiple>
-      <img class="img_excel" src="../../../../assets/img/selectdata/excel.png" 
+      <img class="img_excel" src="../../../../assets/img/selectdata/file.png" 
       style="width: 55px; height: 50px; "/>
-      <div class="el-upload__text">将Excel文件放在此处或 <em>单击以上传</em></div>
+      <div class="el-upload__text">将Excel或TxT文件放在此处或 <em>单击以上传</em></div>
     </el-upload>
   </div>
 </template>
@@ -36,36 +36,38 @@ export default {
     },
     handleSuccess(response,file,fileList) {
       console.log("loading ---- handleSuccess ----",response,file,fileList)
-      this.$message({message: "数据集加载完毕",type: 'success'})
 
       if(fileList[0].name.split(".")[1]=="txt"){
+        this.$message({message: "文本加载完毕",type: 'success'})
+        this.uploadflag = true
+        this.$emit('txtSuccess',this.uploadflag)
         var xAxis=[],yAxis=[]
         this.$store.state.excelName = fileList[0].name
         let resultFile = fileList[0]
-        console.log(fileList[0].name,resultFile)
+        this.$store.state.txtFlag = true
 
         if(resultFile){
           let reader = new FileReader()
           reader.readAsText(resultFile.raw, 'UTF-8')
-           reader.onload = function(e) {
-             var fileContent = e.target.result
-             console.log(fileContent.toString())
-             var jsarr = JSON.parse(fileContent)
+          reader.onload = function(e) {
+            var fileContent = e.target.result
+            var jsarr = JSON.parse(fileContent)
+            console.log('loading ---- 数据 ----',fileContent)
             
-             for (var i = 0; i < jsarr.product.length; i++) {
-               xAxis[i] = jsarr.product[i].name
-               yAxis[i] = jsarr.product[i].num
-              }
-           }
+            for (var i = 0; i < jsarr.product.length; i++) {
+              xAxis[i] = jsarr.product[i].name
+              yAxis[i] = jsarr.product[i].num
+            }
+          }
         }
-        this.$store.state.dataDimensions = xAxis
-        this.$store.state.dataNumericals = yAxis
       }
 
       if((fileList[0].name.split(".")[1]=='xlsx')||(fileList[0].name.split(".")[1]=="xls")){
+        this.$message({message: "数据集加载完毕",type: 'success'})
+        this.$store.state.txtFlag = false
         this.$store.state.excelName = fileList[0].name
         this.uploadflag = true
-        this.$emit('uploadSuccess',this.uploadflag)
+        this.$emit('excelSuccess',this.uploadflag)
 
         this.file2Xce(fileList[0]).then(tabJson =>{
           if(tabJson && tabJson.length >0){

@@ -3,7 +3,8 @@
   <div>
     <div class="analysisInfo">
       <chartsBoard v-show="chartFlag" @chartVisible="chartBoardShow"/>
-      <createCharts @chartShow="chartBoardShow"/>
+      <txtChartsBoard v-show="txtChartFlag" @changeTxtVisible="txtChartBoardShow"/>
+      <createCharts @chartShow="chartBoardShow" @txtChartsShow="txtChartBoardShow"/>
       <chartTable/>
     </div>
   </div>
@@ -15,23 +16,29 @@ import createCharts from 'components/content/createcharts/createCharts'
 import chartTable from 'components/content/createcharts/chartTable'
 
 import chartsBoard from 'components/content/chartsboard/chartsBoard'
+import txtChartsBoard from 'components/content/txtchartsboard/txtChartsBoard'
 
 export default {
   name: 'ChartAnalysis',
    data () {
     return {
-      chartFlag: false
+      chartFlag: false,
+      txtChartFlag: false
     }
   },
   methods: {
     chartBoardShow(chartFlag) {
       this.chartFlag = chartFlag
+    },
+    txtChartBoardShow(txtChartFlag) {
+      this.txtChartFlag = txtChartFlag
     }
   },
   components: {
     createCharts,
     chartTable,
-    chartsBoard
+    chartsBoard,
+    txtChartsBoard
   }
 }
 </script>

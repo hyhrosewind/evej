@@ -12,7 +12,7 @@
       <el-dialog title="选择创建方式" :visible.sync="dialogVisible" width="30%">
 
       <div class="data_upload">
-        <excelUpload @uploadSuccess="handleVisible"/>
+        <excelUpload @excelSuccess="handleVisible" @txtSuccess="handleTxt"/>
       </div>
 
       <span slot="footer" class="dialog-footer">
@@ -38,21 +38,26 @@ export default {
       dialogVisible: false,
       dialogTable: false,
       fontColor: 'rgba(30,95,150,.8)',
-      flag: false
+      excelFlag: false,
+      txtFlag: false
     }
   },
   methods: {
-    handleVisible(flag) {
-      this.flag = flag
+    handleVisible(excelFlag) {
+      this.excelFlag = excelFlag
     },
     handleData() {
       this.dialogVisible = false
-      if(this.flag==true) {
+      if(this.excelFlag==true) {
         this.dialogTable = true
-      }else {
-        this.$message({
-        message: "数据集未加载完毕，请耐心等待...",type: 'warning'})
       }
+      else if((this.txtFlag==false)&&(this.excelFlag==false)){
+        this.$message({
+        message: "文件未加载完毕，请耐心等待...",type: 'warning'})
+      }
+    },
+    handleTxt(txtFlag) {
+      this.txtFlag = txtFlag
     }
   },
   components: {

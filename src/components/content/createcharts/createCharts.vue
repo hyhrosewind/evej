@@ -19,7 +19,11 @@ export default {
   },
   methods: {
     showAnalysis(){
-      this.$emit('chartShow',this.chartsBoardVisible)
+      if(this.$store.state.txtFlag==false) {
+        this.$emit('chartShow',this.chartsBoardVisible)
+      }else{
+        this.$emit('txtChartsShow',this.chartsBoardVisible)
+      }
     }
   },
   components: {

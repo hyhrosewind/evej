@@ -1,7 +1,7 @@
 <template>
   <div class="main-charts" 
   :style="{backgroundImage:`url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`}">
-    <histogram v-show="chartFlag" 
+    <histogram v-if="chartFlag" 
     :x_data="this.$store.state.dataDimensions"
     :series_data="this.$store.state.dataNumericals"/>
   </div>
@@ -26,7 +26,6 @@ export default {
   watch: {
     drawFlag() {
       if(this.$store.selectedDimensions!=''&&this.$store.selectedNumericals!=''){
-        this.chartFlag = true
         this.$store.state.dataDimensions.splice(0, this.$store.state.dataDimensions.length)
         this.$store.state.dataNumericals.splice(0, this.$store.state.dataNumericals.length)
         let sheet = this.$store.state.selectedSheet
@@ -40,7 +39,10 @@ export default {
             }
           }
         }
+        this.chartFlag = true
       }
+      this.$store.state.selectedDimensions.splice(0, this.$store.state.selectedDimensions.length)
+      this.$store.state.selectedNumericals.splice(0, this.$store.state.selectedNumericals.length)
     }
   },
   components: {

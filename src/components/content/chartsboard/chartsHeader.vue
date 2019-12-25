@@ -24,10 +24,18 @@ export default {
   },
   methods: {
     saveCharts() {
-      this.$emit("chartsShowHeader",this.chart_show)
+      if(this.$store.state.txtFlag==false) {
+        this.$emit("chartsShowHeader",this.chart_show)
+      }else{
+        this.$emit("txtChartsShowHeader",this.chart_show)
+      }
     },
     cancelEdit() {
-      this.$emit("chartsShowHeader",this.chart_show)
+      if(this.$store.state.txtFlag==false) {
+        this.$emit("chartsShowHeader",this.chart_show)
+      }else{
+        this.$emit("txtChartsShowHeader",this.chart_show)
+      }
     }
   },
   components: {

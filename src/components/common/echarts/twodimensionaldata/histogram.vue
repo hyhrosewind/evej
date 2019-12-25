@@ -8,8 +8,6 @@ export default {
   name: 'histogram',
   data() {
     return {
-      x: this.$store.state.dataDimensions,
-      y: this.$store.state.dataNumericals
     }
   },
   props: {
@@ -59,9 +57,9 @@ export default {
     xAxis : [
         {
             type : 'category',
-            data : this.x,
+            data : this.x_data,
             axisTick: {
-                alignWithLabel: true
+              alignWithLabel: true
             }
         }
     ],
@@ -75,7 +73,7 @@ export default {
             name:'直接访问',
             type:'bar',
             barWidth: '60%',
-            data: this.y
+            data: this.series_data
         }
     ]
       })
