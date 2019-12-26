@@ -79,7 +79,7 @@ export default {
       }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- dimension ---- ',evt.item.innerText)
-      this.$store.state.selectedDimensions.push(evt.item.innerText)
+      this.$store.state.selectedDimensions[0]=evt.item.innerText
     },
     addNumerical(evt) {
       if(this.$store.state.selectedNumericals!=''){
@@ -87,11 +87,12 @@ export default {
       }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
-      this.$store.state.selectedNumericals.push(evt.item.innerText)
+      this.$store.state.selectedNumericals[0]=evt.item.innerText
     },
     drawCharts(chartLabel) {
       if(this.$store.state.selectedDimensions!=''&&this.$store.state.selectedNumericals!=''){
         this.$emit('uploadCharts',chartLabel)
+        console.log(chartLabel)
       }
     }
   },

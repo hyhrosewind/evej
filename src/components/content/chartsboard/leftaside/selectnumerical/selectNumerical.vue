@@ -12,7 +12,8 @@
             style="width: 26px; height: 20px; position: absolute; margin-top: 1px; "/>
           </div>
           <div>
-            <el-tag style="margin-left: 33px;" size="small">{{index}}</el-tag>
+            <el-tag style="margin-left: 33px;" size="small" 
+            closable @close="handleClose(index)">{{index}}</el-tag>
           </div>
         </div>
       </draggable>
@@ -25,6 +26,11 @@ import draggable from 'vuedraggable'
 
 export default {
   name: 'selectNumberical',
+  methods: {
+    handleClose(tag) {
+      this.$store.state.excelNumerical.splice(this.$store.state.excelNumerical.indexOf(tag), 1);
+    }
+  },
   components: {
     draggable
   }

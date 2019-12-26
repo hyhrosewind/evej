@@ -37,9 +37,6 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('pieGraph'))
       
       myChart.setOption({
-
-        color: ['	rgba(0,84,255,.5)'],
-
     title: {
         text: 'Customized Pie',
         left: 'center',
@@ -51,14 +48,6 @@ export default {
     tooltip : {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    visualMap: {
-        show: false,
-        min: 80,
-        max: 600,
-        inRange: {
-          colorLightness: [0.5, 0.8]
-        }
     },
     series : [
         {
@@ -87,8 +76,17 @@ export default {
             },
             itemStyle: {
                 normal: {
-                    color: '#c23531'
-                }
+                    color:function(params) {
+                        var colorList = [          
+                        'rgba(0,84,255,.5)', 'rgba(0,84,255,.6)', 
+                        'rgba(0,84,255,.3)', 'rgba(0,84,255,.22)', 
+                        'rgba(0,84,255,.4)', 'rgba(0,84,255,.7)',
+                        'rgba(0,84,255,.4)', 'rgba(0,84,255,.8)',
+                        'rgba(0,84,255,.44)', 'rgba(0,84,255,.26)'
+                      ];
+                      return colorList[params.dataIndex]
+                    }
+                  }
             },
 
             animationType: 'scale',

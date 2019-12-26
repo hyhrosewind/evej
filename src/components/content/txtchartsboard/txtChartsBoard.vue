@@ -3,11 +3,11 @@
     <div><chartsHeader @txtChartsShowHeader="handleShow"/></div>
     <el-tabs type="border-card"
     style=" height: 470px; margin-left: 30px; margin-right: 30px; ">
-      <el-tab-pane label="柱状图"><histogram v-if="histogramShow"/></el-tab-pane>
-      <el-tab-pane label="3D散点图">3D散点图</el-tab-pane>
-      <el-tab-pane label="多维数据">多维数据</el-tab-pane>
-      <el-tab-pane label="网状数据">网状数据</el-tab-pane>
-      <el-tab-pane label="层次数据">层次数据</el-tab-pane>
+      <el-tab-pane label="柱状图" :disabled="paneDisabled"><histogram v-if="histogramShow"/></el-tab-pane>
+      <el-tab-pane label="3D散点图" :disabled="paneDisabled">3D散点图</el-tab-pane>
+      <el-tab-pane label="多维数据" :disabled="paneDisabled">多维数据</el-tab-pane>
+      <el-tab-pane label="网状数据" :disabled="paneDisabled">网状数据</el-tab-pane>
+      <el-tab-pane label="层次数据" :disabled="paneDisabled">层次数据</el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -19,6 +19,11 @@ import histogram from 'components/common/echarts/twodimensionaldata/histogram'
 
 export default {
   name: 'txtChartsBoard',
+  data() {
+    return {
+      paneDisabled: false
+    }
+  },
   props: {
     histogramShow: {
       type: Boolean,
@@ -26,11 +31,6 @@ export default {
     }
   },
   created() {
-    
-  },
-  data() {
-    return {
-    }
   },
   methods: {
     handleShow(txt_show) {

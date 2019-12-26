@@ -8,7 +8,7 @@
         <el-aside width="180px"><leftAside/></el-aside>
         <el-main>
           <mainTable @uploadCharts="handleCharts"/>
-          <mainCharts :drawFlag="drawFlag"/>
+          <mainCharts :drawFlag="drawFlag" @clearTags="handleTags"/>
         </el-main>
         <el-aside style=" width: 180px; margin-left: 980px; ">
           <rightAside/>
@@ -39,6 +39,9 @@ export default {
     },
     handleCharts(chartLabel) {
       this.drawFlag = chartLabel
+    },
+    handleTags() {
+      this.drawFlag = ''
     }
   },
   components: {

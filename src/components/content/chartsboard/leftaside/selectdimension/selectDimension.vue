@@ -12,8 +12,8 @@
             style="width: 22px; height: 20px; position: absolute; margin-top: 1px;"/>
           </div>
           <div class="tag_div">
-            <el-tag style="margin-left: 33px; "
-            size="small">{{index}}</el-tag>
+            <el-tag style="margin-left: 33px; " 
+            closable size="small" @close="handleClose(index)">{{index}}</el-tag>
           </div>
         </div>
       </draggable>
@@ -31,8 +31,8 @@ export default {
     }
   },
   methods: {
-    handleTags(evt){
-      console.log(evt.draggedContext.index.name)
+    handleClose(tag) {
+      this.$store.state.excelDimension.splice(this.$store.state.excelDimension.indexOf(tag), 1);
     }
   },
   components: {

@@ -1,7 +1,7 @@
 <template>
   <div class="main-charts" 
-  :style="{backgroundImage:`url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`}">
-    <histogram v-if="histogramFlag" 
+  :style="{backgroundImage: backgroundImg}">
+    <histogram v-if="histogramFlag"
     :x_data="this.$store.state.dataDimensions"
     :series_data="this.$store.state.dataNumericals"/>
     <lineGraph v-if="lineFlag"
@@ -23,7 +23,8 @@ export default {
     return {
       histogramFlag: false,
       lineFlag: false,
-      pieFlag: false
+      pieFlag: false,
+      backgroundImg: `url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`
     }
   },
   props: {
@@ -34,7 +35,9 @@ export default {
   },
   watch: {
     drawFlag(val) {
-      if(this.$store.selectedDimensions!=''&&this.$store.selectedNumericals!=''){
+      if(val!=''){
+        if(this.$store.selectedDimensions!=''&&this.$store.selectedNumericals!=''){
+        this.backgroundImg = ''
         this.$store.state.dataDimensions.splice(0, this.$store.state.dataDimensions.length)
         this.$store.state.dataNumericals.splice(0, this.$store.state.dataNumericals.length)
         let sheet = this.$store.state.selectedSheet
@@ -50,9 +53,13 @@ export default {
         }
 
         if(val=='histogram'){
+          this.pieFlag = false
+          this.lineFlag = false
           this.histogramFlag = true
         }
         else if(val=='line'){
+          this.pieFlag = false
+          this.histogramFlag = false
           this.lineFlag = true
         }
         else if(val=='pie'){
@@ -69,11 +76,13 @@ export default {
               }
             }
           }
+          this.histogramFlag = false
+          this.lineFlag = false
           this.pieFlag = true
         }
+        this.$emit('clearTags')
       }
-      this.$store.state.selectedDimensions.splice(0, this.$store.state.selectedDimensions.length)
-      this.$store.state.selectedNumericals.splice(0, this.$store.state.selectedNumericals.length)
+      }
     }
   },
   components: {
