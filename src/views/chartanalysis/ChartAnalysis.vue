@@ -2,8 +2,8 @@
 <template>
   <div>
     <div class="analysisInfo">
-      <chartsBoard v-show="chartFlag" @chartVisible="chartBoardShow"/>
-      <txtChartsBoard v-show="txtChartFlag" @changeTxtVisible="txtChartBoardShow"/>
+      <chartsBoard v-if="chartFlag" @chartVisible="chartBoardShow"/>
+      <txtChartsBoard v-if="txtChartFlag" @changeTxtVisible="txtChartBoardShow"/>
       <createCharts @chartShow="chartBoardShow" @txtChartsShow="txtChartBoardShow"/>
       <chartTable/>
     </div>

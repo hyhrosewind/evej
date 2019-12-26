@@ -12,6 +12,8 @@ const store = new Vuex.Store({
     excelDimension: [],
     excelNumerical: [],
     txtFlag: Boolean,
+    txtFile: '',
+    pieData: [],
     selectedDimensions: [],
     selectedNumericals: [],
     dataDimensions: [],

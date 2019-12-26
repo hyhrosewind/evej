@@ -5,14 +5,20 @@
       <tr class="table-tr"><td class="table-td">类型</td>
         <td class="charts-type" style="text-align: left;">
           <el-button class="charts-button" label="histogram" 
-          type="primary" plain @click="drawCharts">
+          type="primary" plain @click="drawCharts('histogram')">
             <img src="../../../../assets/img/echarts/echarts-histogram.png"
             style="width: 20px; height: 20px; 
             position: absolute; margin-left: -10px; margin-top: -10px;"/>
           </el-button>
           <el-button class="charts-button" label="line" 
-          type="primary" plain>
+          type="primary" plain @click="drawCharts('line')">
             <img src="../../../../assets/img/echarts/echarts-line.png"
+            style="width: 20px; height: 20px; 
+            position: absolute; margin-left: -10px; margin-top: -10px;"/>
+          </el-button>
+          <el-button class="charts-button" label="pie" 
+          type="primary" plain @click="drawCharts('pie')">
+            <img src="../../../../assets/img/echarts/echarts-pie.png"
             style="width: 20px; height: 20px; 
             position: absolute; margin-left: -10px; margin-top: -10px;"/>
           </el-button>
@@ -83,9 +89,9 @@ export default {
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumericals.push(evt.item.innerText)
     },
-    drawCharts() {
+    drawCharts(chartLabel) {
       if(this.$store.state.selectedDimensions!=''&&this.$store.state.selectedNumericals!=''){
-        this.$emit('uploadCharts')
+        this.$emit('uploadCharts',chartLabel)
       }
     }
   },

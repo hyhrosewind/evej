@@ -15,6 +15,18 @@ export default {
     chart_height: {
       type: Number,
       default: 470
+    },
+    x_data: {
+      type: Array,
+      default: () => {
+        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      }
+    },
+    series_data: {
+      type: Array,
+      default: () => {
+        return [820, 932, 901, 934, 1290, 1330, 1320]
+      }
     }
   },
   mounted () {
@@ -23,81 +35,22 @@ export default {
   methods: {
     drawLine () {
       let myChart = this.$echarts.init(document.getElementById('lineGraph'))
-      
-      function randomData() {
-    now = new Date(+now + oneDay);
-    value = value + Math.random() * 21 - 10;
-    return {
-        name: now.toString(),
-        value: [
-            [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-            Math.round(value)
-        ]
-    }
-}
-
-var data = [];
-var now = +new Date(1997, 9, 3);
-var oneDay = 24 * 3600 * 1000;
-var value = Math.random() * 1000;
-for (var i = 0; i < 1000; i++) {
-    data.push(randomData());
-}
-
       myChart.setOption({
-    title: {
-        text: '动态数据 + 时间坐标轴',
-        textStyle: {
-          fontSize: 14
-        }
-    },
-    tooltip: {
-        trigger: 'axis',
-        formatter: function (params) {
-            params = params[0];
-            var date = new Date(params.name);
-            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-        },
-        axisPointer: {
-            animation: false
-        }
-    },
+        color: ['	rgba(0,84,255,.5)'],
     xAxis: {
-        type: 'time',
-        splitLine: {
-            show: false
-        }
+        type: 'category',
+        boundaryGap: false,
+        data: this.x_data
     },
     yAxis: {
-        type: 'value',
-        boundaryGap: [0, '100%'],
-        splitLine: {
-            show: false
-        }
+        type: 'value'
     },
     series: [{
-        name: '模拟数据',
+        data: this.series_data,
         type: 'line',
-        showSymbol: false,
-        hoverAnimation: false,
-        data: data
-    }]
-});
-
-setInterval(function () {
-
-    for (var i = 0; i < 5; i++) {
-        data.shift();
-        data.push(randomData());
-    }
-
-    myChart.setOption({
-        series: [{
-            data: data
-        }]
-    });
-}, 1000);
-
+        areaStyle: {}
+     }]
+    })
     }
   }
 }

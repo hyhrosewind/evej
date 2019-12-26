@@ -15,6 +15,18 @@ export default {
     chart_height: {
       type: Number,
       default: 470
+    },
+    pie_data: {
+      type: Array,
+      default: () => {
+        return [
+          {value:335, name:'直接访问'},
+          {value:310, name:'邮件营销'},
+          {value:274, name:'联盟广告'},
+          {value:235, name:'视频广告'},
+          {value:400, name:'搜索引擎'}
+        ]
+      }
     }
   },
   mounted () {
@@ -26,6 +38,8 @@ export default {
       
       myChart.setOption({
 
+        color: ['	rgba(0,84,255,.5)'],
+
     title: {
         text: 'Customized Pie',
         left: 'center',
@@ -34,18 +48,16 @@ export default {
             fontSize: 14
         }
     },
-
     tooltip : {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-
     visualMap: {
         show: false,
         min: 80,
         max: 600,
         inRange: {
-            colorLightness: [0, 1]
+          colorLightness: [0.5, 0.8]
         }
     },
     series : [
@@ -54,13 +66,7 @@ export default {
             type:'pie',
             radius : '55%',
             center: ['50%', '50%'],
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:274, name:'联盟广告'},
-                {value:235, name:'视频广告'},
-                {value:400, name:'搜索引擎'}
-            ].sort(function (a, b) { return a.value - b.value; }),
+            data: this.pie_data.sort(function (a, b) { return a.value - b.value; }),
             roseType: 'radius',
             label: {
                 normal: {

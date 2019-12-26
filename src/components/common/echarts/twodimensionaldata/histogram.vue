@@ -13,11 +13,11 @@ export default {
   props: {
     chart_width: {
       type: Number,
-      default: 520
+      default: 530
     },
     chart_height: {
       type: Number,
-      default: 470
+      default: 410
     },
     x_data: {
       type: Array,

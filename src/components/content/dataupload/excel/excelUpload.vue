@@ -41,18 +41,17 @@ export default {
         this.$message({message: "文本加载完毕",type: 'success'})
         this.uploadflag = true
         this.$emit('txtSuccess',this.uploadflag)
-        var xAxis=[],yAxis=[]
+        var xAxis=[], yAxis=[], fileContent = '', jsarr = ''
         this.$store.state.excelName = fileList[0].name
         let resultFile = fileList[0]
         this.$store.state.txtFlag = true
-
         if(resultFile){
           let reader = new FileReader()
           reader.readAsText(resultFile.raw, 'UTF-8')
           reader.onload = function(e) {
-            var fileContent = e.target.result
-            var jsarr = JSON.parse(fileContent)
-            console.log('loading ---- 数据 ----',fileContent)
+            fileContent = e.target.result
+            jsarr = JSON.parse(fileContent)
+            console.log('loading ---- 数据 ----',jsarr)
             
             for (var i = 0; i < jsarr.product.length; i++) {
               xAxis[i] = jsarr.product[i].name
@@ -60,6 +59,7 @@ export default {
             }
           }
         }
+        this.$store.state.txtFile = jsarr
       }
 
       if((fileList[0].name.split(".")[1]=='xlsx')||(fileList[0].name.split(".")[1]=="xls")){

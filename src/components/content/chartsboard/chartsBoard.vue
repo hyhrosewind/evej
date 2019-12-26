@@ -30,15 +30,15 @@ export default {
   name: 'chartsBoard',
   data() {
     return {
-      drawFlag: false
+      drawFlag: ''
     }
   },
   methods: {
     handleChartsShow(chart_show) {
       this.$emit('chartVisible',chart_show)
     },
-    handleCharts() {
-      this.drawFlag = true
+    handleCharts(chartLabel) {
+      this.drawFlag = chartLabel
     }
   },
   components: {
