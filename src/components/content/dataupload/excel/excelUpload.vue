@@ -39,27 +39,21 @@ export default {
 
       if(fileList[0].name.split(".")[1]=="txt"){
         this.$message({message: "文本加载完毕",type: 'success'})
+        if(this.$store.state.txtData!=''){
+          this.$store.state.txtData.splice(0, this.$store.state.txtData.length)
+        }
         this.uploadflag = true
         this.$emit('txtSuccess',this.uploadflag)
-        var xAxis=[], yAxis=[], fileContent = '', jsarr = ''
         this.$store.state.excelName = fileList[0].name
-        let resultFile = fileList[0]
         this.$store.state.txtFlag = true
-        if(resultFile){
-          let reader = new FileReader()
-          reader.readAsText(resultFile.raw, 'UTF-8')
-          reader.onload = function(e) {
-            fileContent = e.target.result
-            jsarr = JSON.parse(fileContent)
-            console.log('loading ---- 数据 ----',jsarr)
-            
-            for (var i = 0; i < jsarr.product.length; i++) {
-              xAxis[i] = jsarr.product[i].name
-              yAxis[i] = jsarr.product[i].num
-            }
-          }
+        if(fileList[0]) {
+          this.txtFile(fileList[0]).then(res=>{
+            if(res && res.length >0){
+              this.$store.state.txtData = res
+              console.log('loading txt ---- 数据 ----',this.$store.state.txtData)
+            } 
+          })
         }
-        this.$store.state.txtFile = jsarr
       }
 
       if((fileList[0].name.split(".")[1]=='xlsx')||(fileList[0].name.split(".")[1]=="xls")){
@@ -68,15 +62,24 @@ export default {
         this.$store.state.excelName = fileList[0].name
         this.uploadflag = true
         this.$emit('excelSuccess',this.uploadflag)
-
         this.file2Xce(fileList[0]).then(tabJson =>{
           if(tabJson && tabJson.length >0){
             this.xlsxJson = tabJson
             this.$store.state.excelData = this.xlsxJson
-            console.log('loading ---- 数据 ----',this.xlsxJson)
+            console.log('loading xlsx ---- 数据 ----',this.xlsxJson)
           }
         })
       }
+    },
+    txtFile(resultFile) {
+      return new Promise(function(resolve){
+        const reader = new FileReader()
+        reader.onload = function(e) {
+          const result = (JSON.parse(e.target.result)).product
+          resolve(result)
+        }
+        reader.readAsText(resultFile.raw, 'UTF-8')
+      })
     },
     file2Xce(file) {
       return new Promise(function(resolve){

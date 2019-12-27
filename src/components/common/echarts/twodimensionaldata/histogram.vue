@@ -42,6 +42,12 @@ export default {
       let myChart  = this.$echarts.init(document.getElementById('histogram'))
       myChart.setOption({
         color: ['	rgba(0,84,255,.5)'],
+        title: {
+          text: '柱状图 - 二维数据',
+          textStyle: {
+            fontSize: 14
+          }
+        },
     tooltip : {
         trigger: 'axis',
         axisPointer : {            // 坐标轴指示器，坐标轴触发有效

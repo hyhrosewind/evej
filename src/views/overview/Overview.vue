@@ -49,6 +49,20 @@
           <sunburst :chart_width="450" :chart_height="375"/>
         </div>
       </el-col>
+      <el-col :span="11">
+        <h5>层次数据 树图</h5>
+        <div class="grid-content bg-purple">
+          <treeGraph :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="16">
+      <el-col :span="11">
+        <h5>网状数据 关系图</h5>
+        <div class="grid-content bg-purple">
+          <gridGraph :chart_width="450" :chart_height="375"/>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -64,7 +78,10 @@ import mapGraph from 'components/common/echarts/dspatialdata/mapGraph'
 
 import radarMap from 'components/common/echarts/multidimensionaldata/radarMap'
 
+import gridGraph from 'components/common/echarts/griddata/gridGraph'
+
 import sunburst from 'components/common/echarts/hierarchicaldata/sunburst'
+import treeGraph from 'components/common/echarts/hierarchicaldata/treeGraph'
 
 export default {
   name: 'overview',
@@ -75,7 +92,9 @@ export default {
     scatter,
     mapGraph,
     radarMap,
-    sunburst
+    gridGraph,
+    sunburst,
+    treeGraph
   }
 }
 </script>
@@ -97,7 +116,7 @@ export default {
 .el-col {
   border-radius: 4px;
   padding: 10px;
-  background: rgba(90,68,128,.1);
+  background: rgba(90,68,128,.2);
   margin-left: 30px;
 }
 
@@ -106,7 +125,7 @@ export default {
   border-radius: 4px;
   padding: 20px;
   text-align: center;
-  background: #99a9bf;
+  background: #fff;
 }
 
 </style>
