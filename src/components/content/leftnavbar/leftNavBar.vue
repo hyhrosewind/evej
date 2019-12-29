@@ -45,6 +45,10 @@
           <img src="../../../assets/img/echarts/echarts-pie.png" 
           style="width: 25px; height: 25px; margin-right: 10px;"/>饼 图
         </el-menu-item>
+        <el-menu-item index="4-4" @click="changeView(7)">
+          <img src="../../../assets/img/echarts/echarts-funnel.png" 
+          style="width: 25px; height: 25px; margin-right: 10px;"/>漏斗图
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="5">
@@ -53,15 +57,10 @@
           style="width: 20px; height: 20px; margin-right: 10px;"/>
           <span slot="title">三维数据</span>
         </template>
-        <el-menu-item index="5-1" @click="changeView(7)">
+        <el-menu-item index="5-1" @click="changeView(8)">
            <img src="../../../assets/img/echarts/echarts-scatter.png" 
            style="width: 20px; height: 20px; margin-right: 10px;"/>
           散点图
-        </el-menu-item>
-        <el-menu-item index="5-2" @click="changeView(8)">
-           <img src="../../../assets/img/echarts/echarts-map.png" 
-           style="width: 20px; height: 20px; margin-right: 10px;"/>
-          地理图
         </el-menu-item>
       </el-submenu>
 
@@ -80,8 +79,13 @@
       <el-submenu index="7">
         <template slot="title">
           <img src="../../../assets/img/data-structure/gridData.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
-          <span slot="title">网格数据</span>
+          <span slot="title">网状数据</span>
         </template>
+         <el-menu-item index="8-1" @click="changeView(10)">
+           <img src="../../../assets/img/echarts/echarts-relate.png" 
+           style="width: 25px; height: 25px; margin-right: 10px;"/>
+           关系图
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="8">
@@ -90,9 +94,9 @@
           <span slot="title">层次数据</span>
         </template>
         <el-menu-item index="8-1" @click="changeView(11)">
-           <img src="../../../assets/img/echarts/echarts-sunburst.png" 
-           style="width: 25px; height: 25px; margin-right: 10px;"/>
-           旭日图
+           <img src="../../../assets/img/echarts/echarts-tree.png" 
+           style="width: 20px; height: 20px; margin-right: 10px;"/>
+           树图
         </el-menu-item>
       </el-submenu>
       
@@ -107,7 +111,7 @@ export default {
   data() {
       return {
         isCollapse: true
-      };
+      }
   },
   methods: {
     changeView (index) {
@@ -117,8 +121,10 @@ export default {
       else if(index==4) this.$router.push('/EchartsHistogram')
       else if(index==5) this.$router.push('/EchartsLine')
       else if(index==6) this.$router.push('/EchartsPie')
-      else if(index==7) this.$router.push('/EchartsScatter')
+      else if(index==7) this.$router.push('/EchartsFunnel')
+      else if(index==8) this.$router.push('/EchartsScatter')
       else if(index==9) this.$router.push('/EchartsRadar')
+      else if(index==10) this.$router.push('/EchartsRelate')
       else if(index==11) this.$router.push('/EchartsSunburst')
     }
   }

@@ -1,4 +1,4 @@
-<!--  折线图  -->
+<!--  饼图  -->
 <template>
   <div id="pieGraph" class='pieGraph' :style="{width: chart_width + 'px', height: chart_height + 'px'}"></div>
 </template>
@@ -38,7 +38,7 @@ export default {
       
       myChart.setOption({
     title: {
-        text: 'Customized Pie',
+        text: '饼图 - 二维数据',
         left: 'center',
         top: 20,
         textStyle: {

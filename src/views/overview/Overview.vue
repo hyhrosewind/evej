@@ -22,45 +22,31 @@
         </div>
       </el-col>
       <el-col :span="11">
+        <h5>二维数据 漏斗图</h5>
+        <div class="grid-content bg-purple">
+          <funnelGraph :chart_width="465" :chart_height="375"/>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="16">
+      <el-col :span="11">
         <h5>三维数据 散点图</h5>
         <div class="grid-content bg-purple">
           <scatter :chart_width="450" :chart_height="375"/>
         </div>
       </el-col>
-    </el-row>
-    <el-row :gutter="16">
-      <el-col :span="11">
-        <h5>三维数据 地图</h5>
+       <el-col :span="11">
+        <h5>网状数据 关系图</h5>
         <div class="grid-content bg-purple">
-          <mapGraph :chart_width="450" :chart_height="375"/>
-        </div>
-      </el-col>
-      <el-col :span="11">
-        <h5>多维数据 雷达图</h5>
-        <div class="grid-content bg-purple">
-          <radarMap :chart_width="450" :chart_height="375"/>
+          <gridGraph :chart_width="450" :chart_height="375"/>
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="16">
-      <el-col :span="11">
-        <h5>层次数据 旭日图</h5>
-        <div class="grid-content bg-purple">
-          <sunburst :chart_width="450" :chart_height="375"/>
-        </div>
-      </el-col>
       <el-col :span="11">
         <h5>层次数据 树图</h5>
         <div class="grid-content bg-purple">
           <treeGraph :chart_width="450" :chart_height="375"/>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="16">
-      <el-col :span="11">
-        <h5>网状数据 关系图</h5>
-        <div class="grid-content bg-purple">
-          <gridGraph :chart_width="450" :chart_height="375"/>
         </div>
       </el-col>
     </el-row>
@@ -72,15 +58,12 @@
 import histogram from 'components/common/echarts/twodimensionaldata/histogram'
 import lineGraph from 'components/common/echarts/twodimensionaldata/lineGraph'
 import pieGraph from 'components/common/echarts/twodimensionaldata/pieGraph'
+import funnelGraph from 'components/common/echarts/twodimensionaldata/funnelGraph'
 
 import scatter from 'components/common/echarts/dspatialdata/scatter'
-import mapGraph from 'components/common/echarts/dspatialdata/mapGraph'
-
-import radarMap from 'components/common/echarts/multidimensionaldata/radarMap'
 
 import gridGraph from 'components/common/echarts/griddata/gridGraph'
 
-import sunburst from 'components/common/echarts/hierarchicaldata/sunburst'
 import treeGraph from 'components/common/echarts/hierarchicaldata/treeGraph'
 
 export default {
@@ -89,11 +72,9 @@ export default {
     histogram,
     lineGraph,
     pieGraph,
+    funnelGraph,
     scatter,
-    mapGraph,
-    radarMap,
     gridGraph,
-    sunburst,
     treeGraph
   }
 }

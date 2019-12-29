@@ -156,6 +156,12 @@ export default {
 myChart.hideLoading()
 
       myChart.setOption({
+        title: {
+          text: '关系图 - 网状数据',
+          textStyle: {
+            fontSize: 14
+          }
+        },
         legend: {
           data: ['人物1','人物2','人物3']
         },

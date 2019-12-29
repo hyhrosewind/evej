@@ -1,17 +1,18 @@
-<!--  层次数据 树图  -->
+<!--  二维数据 漏斗图 -->
 <template>
   <div class="echartInfo">
-    <treeGraph/>
+    <funnelGraph/>
   </div>
 </template>
 
 <script>
-import treeGraph from 'components/common/echarts/hierarchicaldata/treeGraph'
+
+import funnelGraph from 'components/common/echarts/twodimensionaldata/funnelGraph'
 
 export default {
-  name: 'EchartsSunburst',
+  name: 'EchartsFunnel',
   components: {
-    treeGraph
+    funnelGraph
   }
 }
 </script>

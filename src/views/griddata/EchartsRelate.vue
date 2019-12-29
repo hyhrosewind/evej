@@ -1,17 +1,17 @@
-<!--  层次数据 树图  -->
+<!--  网状数据 关系图  -->
 <template>
   <div class="echartInfo">
-    <treeGraph/>
+    <gridGraph/>
   </div>
 </template>
 
 <script>
-import treeGraph from 'components/common/echarts/hierarchicaldata/treeGraph'
+import gridGraph from 'components/common/echarts/griddata/gridGraph'
 
 export default {
-  name: 'EchartsSunburst',
+  name: 'EchartsRelate',
   components: {
-    treeGraph
+    gridGraph
   }
 }
 </script>

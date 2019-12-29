@@ -36,6 +36,12 @@ export default {
     drawLine () {
       let myChart = this.$echarts.init(document.getElementById('lineGraph'))
       myChart.setOption({
+        title: {
+          text: '折线图 - 二维数据',
+          textStyle: {
+            fontSize: 14
+          }
+        },
         color: ['	rgba(0,84,255,.5)'],
     xAxis: {
         type: 'category',

@@ -22,6 +22,12 @@
             style="width: 20px; height: 20px; 
             position: absolute; margin-left: -10px; margin-top: -10px;"/>
           </el-button>
+          <el-button class="charts-button" label="funnel" 
+          type="primary" plain @click="drawCharts('funnel')">
+            <img src="../../../../assets/img/echarts/echarts-funnel.png"
+            style="width: 20px; height: 20px; 
+            position: absolute; margin-left: -10px; margin-top: -10px;"/>
+          </el-button>
         </td>
       </tr>
 

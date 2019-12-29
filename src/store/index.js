@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     txtFlag: Boolean,
     txtData: [],
     pieData: [],
+    funnelData: [],
     selectedDimensions: [],
     selectedNumericals: [],
     dataDimensions: [],

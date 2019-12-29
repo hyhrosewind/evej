@@ -9,6 +9,8 @@
     :series_data="this.$store.state.dataNumericals"/>
     <pieGraph v-if="pieFlag"
     :pie_data="this.$store.state.pieData"/>
+    <funnelGraph v-if="funnelFlag"
+    :funnel_data="this.$store.state.funnelData"/>
   </div>
 </template>
 
@@ -16,6 +18,7 @@
 import histogram from 'components/common/echarts/twodimensionaldata/histogram'
 import lineGraph from 'components/common/echarts/twodimensionaldata/lineGraph'
 import pieGraph from 'components/common/echarts/twodimensionaldata/pieGraph'
+import funnelGraph from 'components/common/echarts/twodimensionaldata/funnelGraph'
 
 export default {
   name: 'mainCharts',
@@ -24,6 +27,7 @@ export default {
       histogramFlag: false,
       lineFlag: false,
       pieFlag: false,
+      funnelFlag: false,
       backgroundImg: `url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`
     }
   },
@@ -53,23 +57,25 @@ export default {
         }
 
         if(val=='histogram'){
-          this.pieFlag = false
+          this.pieFlag = false 
           this.lineFlag = false
+          this.funnelFlag = false
           this.histogramFlag = true
         }
         else if(val=='line'){
           this.pieFlag = false
           this.histogramFlag = false
+          this.funnelFlag = false
           this.lineFlag = true
         }
         else if(val=='pie'){
           this.$store.state.pieData.splice(0, this.$store.state.pieData.length)
-          var x = this.$store.state.dataNumericals,
+          let x = this.$store.state.dataNumericals,
           y = this.$store.state.dataDimensions
-          for(var i = 0;i < x.length; i++){
-            for(var j = 0;j < y.length; j++){
+          for(let i = 0;i < x.length; i++){
+            for(let j = 0;j < y.length; j++){
               if(i==j){
-                var obj = {}
+                let obj = {}
                 obj.value = x[i]
                 obj.name = y[j]
                 this.$store.state.pieData.push(obj)
@@ -78,7 +84,27 @@ export default {
           }
           this.histogramFlag = false
           this.lineFlag = false
+          this.funnelFlag = false
           this.pieFlag = true
+        }
+        else if(val=='funnel'){
+          this.$store.state.funnelData.splice(0, this.$store.state.funnelData.length)
+          let x = this.$store.state.dataNumericals,
+          y = this.$store.state.dataDimensions
+          for(let i = 0;i < x.length; i++){
+            for(let j = 0;j < y.length; j++){
+              if(i==j){
+                let obj = {}
+                obj.value = x[i]
+                obj.name = y[j]
+                this.$store.state.funnelData.push(obj)
+              }
+            }
+          }
+          this.histogramFlag = false
+          this.lineFlag = false
+          this.pieFlag = false
+          this.funnelFlag = true
         }
         this.$emit('clearTags')
       }
@@ -88,7 +114,8 @@ export default {
   components: {
     histogram,
     lineGraph,
-    pieGraph
+    pieGraph,
+    funnelGraph
   }
 }
 </script>
