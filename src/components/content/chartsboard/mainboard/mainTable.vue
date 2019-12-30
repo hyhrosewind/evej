@@ -28,6 +28,12 @@
             style="width: 20px; height: 20px; 
             position: absolute; margin-left: -10px; margin-top: -10px;"/>
           </el-button>
+          <el-button class="charts-button" label="scatter" 
+          type="primary" plain @click="drawCharts('scatter')">
+            <img src="../../../../assets/img/echarts/echarts-scatter.png"
+            style="width: 20px; height: 20px; 
+            position: absolute; margin-left: -10px; margin-top: -10px;"/>
+          </el-button>
         </td>
       </tr>
 
@@ -60,8 +66,28 @@
       </tr>
 
       <tr class="table-tr"><td class="table-td">次值轴</td>
-        <td class="numerical-child"></td>
+        <td class="numerical-child">
+          <draggable v-model="numChildTags" :group="{name: 'numericals'}" 
+          @add="addNumChild" draggable="false"
+           style="height: 28px; text-align: left; padding: 2px; margin-left: 12px; ">
+            <div v-for="index in numericalTags" :key="index" style="width: 90px; ">
+              <div>{{index}}</div>
+            </div>
+          </draggable>
+        </td>
       </tr>    
+
+      <tr class="table-tr"><td class="table-td">z值轴</td>
+        <td class="numerical-z">
+          <draggable v-model="numZTags" :group="{name: 'numericals'}" 
+          @add="addNumZ" draggable="false"
+           style="height: 28px; text-align: left; padding: 2px; margin-left: 12px; ">
+            <div v-for="index in numericalTags" :key="index" style="width: 90px; ">
+              <div>{{index}}</div>
+            </div>
+          </draggable>
+        </td>
+      </tr>  
 
     </table>
   </div>
@@ -75,7 +101,9 @@ export default {
   data() {
     return {
       dimensionTags: [],
-      numericalTags: []
+      numericalTags: [],
+      numChildTags: [],
+      numZTags: []
     }
   },
   methods: {
@@ -95,11 +123,32 @@ export default {
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumericals[0]=evt.item.innerText
     },
+    addNumChild(evt) {
+      if(this.$store.state.selectedNumChild!=''){
+        this.$store.state.selectedNumChild.splice(0, this.$store.state.selectedNumChild.length)
+      }
+      evt.item.style.background = `	rgba(0,255,127,.2)`
+      console.log('selected ---- numerical ---- ',evt.item.innerText)
+      this.$store.state.selectedNumChild[0]=evt.item.innerText
+    },
+    addNumZ(evt) {
+    if(this.$store.state.selectedNumZ!=''){
+        this.$store.state.selectedNumZ.splice(0, this.$store.state.selectedNumZ.length)
+      }
+      evt.item.style.background = `	rgba(0,255,127,.2)`
+      console.log('selected ---- numerical ---- ',evt.item.innerText)
+      this.$store.state.selectedNumZ[0]=evt.item.innerText
+    },
     drawCharts(chartLabel) {
       if(this.$store.state.selectedDimensions!=''&&this.$store.state.selectedNumericals!=''){
         this.$emit('uploadCharts',chartLabel)
         console.log(chartLabel)
       }
+      else if(this.$store.state.selectedNumericals!=''&&
+      this.$store.state.selectedNumChild!=''&&this.$store.state.selectNumZ!='') {
+        this.$emit('uploadCharts',chartLabel)
+        console.log(chartLabel)
+      }  
     }
   },
   components: {

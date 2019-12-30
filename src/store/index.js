@@ -15,10 +15,15 @@ const store = new Vuex.Store({
     txtData: [],
     pieData: [],
     funnelData: [],
+    scatterData: [],
     selectedDimensions: [],
     selectedNumericals: [],
+    selectedNumChild: [],
+    selectedNumZ: [],
     dataDimensions: [],
-    dataNumericals: []
+    dataNumericals: [],
+    dataNumChild: [],
+    dataNumZ: []
   },
   mutations: {},
   actions: {},
