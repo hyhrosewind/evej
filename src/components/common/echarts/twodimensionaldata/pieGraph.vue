@@ -7,6 +7,63 @@
 
 export default {
   name: 'pieGraph',
+  data() {
+    return {
+      option: {
+    title: {
+        text: '饼图 - 二维数据',
+        left: 'center',
+        top: 20,
+        textStyle: {
+            fontSize: 14
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    series : [
+        {
+            name:'访问来源',
+            type:'pie',
+            color: [          
+                        'rgba(0,84,255,.5)', 'rgba(0,84,253,.6)', 
+                        'rgba(0,84,245,.3)', 'rgba(0,84,252,.22)', 
+                        'rgba(0,84,246,.4)', 'rgba(0,84,251,.7)',
+                        'rgba(0,84,250,.4)', 'rgba(0,84,249,.8)',
+                        'rgba(0,84,247,.44)', 'rgba(0,84,248,.26)'
+                      ],
+            radius : '55%',
+            center: ['50%', '50%'],
+            data: this.pie_data.sort(function (a, b) { return a.value - b.value; }),
+            roseType: 'radius',
+            label: {
+                normal: {
+                    textStyle: {
+                        color: '#000'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    smooth: 0.2,
+                    length: 10,
+                    length2: 20
+                }
+            },
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function () {
+                return Math.random() * 200;
+            }
+        }
+      ]
+    }
+    }
+  },
   props: {
     chart_width: {
       type: Number,
@@ -29,75 +86,30 @@ export default {
       }
     }
   },
+  watch: {
+    option: {
+      handler(newVal, oldVal) {
+        if (this.chart) {
+          if (newVal) {
+            this.chart.setOption(newVal)
+          }else{
+            this.chart.setOption(oldVal)
+          }
+          }else{
+            this.init()
+        }
+      },
+      deep: true
+    }
+  },
   mounted () {
-    this.drawLine()
+    this.init()
   },
   methods: {
-    drawLine () {
+    init () {
       let myChart = this.$echarts.init(document.getElementById('pieGraph'))
-      
-      myChart.setOption({
-    title: {
-        text: '饼图 - 二维数据',
-        left: 'center',
-        top: 20,
-        textStyle: {
-            fontSize: 14
-        }
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    series : [
-        {
-            name:'访问来源',
-            type:'pie',
-            radius : '55%',
-            center: ['50%', '50%'],
-            data: this.pie_data.sort(function (a, b) { return a.value - b.value; }),
-            roseType: 'radius',
-            label: {
-                normal: {
-                    textStyle: {
-                        color: '#000'
-                    }
-                }
-            },
-            labelLine: {
-                normal: {
-                    lineStyle: {
-                        color: 'rgba(0, 0, 0, 0.5)'
-                    },
-                    smooth: 0.2,
-                    length: 10,
-                    length2: 20
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color:function(params) {
-                        var colorList = [          
-                        'rgba(0,84,255,.5)', 'rgba(0,84,255,.6)', 
-                        'rgba(0,84,255,.3)', 'rgba(0,84,255,.22)', 
-                        'rgba(0,84,255,.4)', 'rgba(0,84,255,.7)',
-                        'rgba(0,84,255,.4)', 'rgba(0,84,255,.8)',
-                        'rgba(0,84,255,.44)', 'rgba(0,84,255,.26)'
-                      ];
-                      return colorList[params.dataIndex]
-                    }
-                  }
-            },
-
-            animationType: 'scale',
-            animationEasing: 'elasticOut',
-            animationDelay: function () {
-                return Math.random() * 200;
-            }
-        }
-    ]
-});
-
+      myChart.clear()
+      myChart.setOption(this.option)
     }
   }
 }

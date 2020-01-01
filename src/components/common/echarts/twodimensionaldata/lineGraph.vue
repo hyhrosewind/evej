@@ -7,6 +7,32 @@
 
 export default {
   name: 'lineGraph',
+  data() {
+    return {
+      option: {
+        title: {
+          text: '折线图 - 二维数据',
+          textStyle: {
+            fontSize: 14
+          }
+        },
+        color: ['	rgba(0,84,255,.5)'],
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: this.x_data
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: this.series_data,
+        type: 'line',
+        areaStyle: {}
+     }]
+    }
+    }
+  },
   props: {
     chart_width: {
       type: Number,
@@ -29,34 +55,30 @@ export default {
       }
     }
   },
+  watch: {
+    option: {
+      handler(newVal, oldVal) {
+        if (this.chart) {
+          if (newVal) {
+            this.chart.setOption(newVal)
+          }else{
+            this.chart.setOption(oldVal)
+          }
+          }else{
+            this.init()
+        }
+      },
+      deep: true
+    }
+  },
   mounted () {
-    this.drawLine()
+    this.init()
   },
   methods: {
-    drawLine () {
+    init () {
       let myChart = this.$echarts.init(document.getElementById('lineGraph'))
-      myChart.setOption({
-        title: {
-          text: '折线图 - 二维数据',
-          textStyle: {
-            fontSize: 14
-          }
-        },
-        color: ['	rgba(0,84,255,.5)'],
-    xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: this.x_data
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [{
-        data: this.series_data,
-        type: 'line',
-        areaStyle: {}
-     }]
-    })
+      myChart.clear()
+      myChart.setOption(this.option)
     }
   }
 }

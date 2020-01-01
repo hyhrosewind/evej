@@ -8,34 +8,9 @@ import 'echarts-gl'
 
 export default {
   name: 'scatter',
-   props: {
-    chart_width: {
-      type: Number,
-      default: 400
-    },
-    chart_height: {
-      type: Number,
-      default: 370
-    },
-    scatter_data: {
-      type: Array,
-      default: () => {
-        return [
-          [12, 23, 43],[43, 545, 65],[92, 23, 33],
-          [68, 23, 33],[92, 58, 33],[92, 23, 12],
-          [63, 23, 28],[37, 90, 33],[40, 23, 12]
-        ]
-      }
-    }
-  },
-  mounted () {
-    this.drawLine()
-  },
-  methods: {
-    drawLine () {
-      let myChart = this.$echarts.init(document.getElementById('scatter'))
-      
-      myChart.setOption({
+  data() {
+    return {
+      option: {
         title: {
           text: '3D散点图 - 三维数据',
           textStyle: {
@@ -61,7 +36,53 @@ export default {
             }
           }
         ]
-      })
+      }
+    }
+  },
+   props: {
+    chart_width: {
+      type: Number,
+      default: 400
+    },
+    chart_height: {
+      type: Number,
+      default: 370
+    },
+    scatter_data: {
+      type: Array,
+      default: () => {
+        return [
+          [12, 23, 43],[43, 545, 65],[92, 23, 33],
+          [68, 23, 33],[92, 58, 33],[92, 23, 12],
+          [63, 23, 28],[37, 90, 33],[40, 23, 12]
+        ]
+      }
+    }
+  },
+  watch: {
+    option: {
+      handler(newVal, oldVal) {
+        if (this.chart) {
+          if (newVal) {
+            this.chart.setOption(newVal)
+          }else{
+            this.chart.setOption(oldVal)
+          }
+          }else{
+            this.init()
+        }
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  methods: {
+    init () {
+      let myChart = this.$echarts.init(document.getElementById('scatter'))
+      myChart.clear()
+      myChart.setOption(this.option)
     }
   }
 }

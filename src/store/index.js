@@ -23,7 +23,11 @@ const store = new Vuex.Store({
     dataDimensions: [],
     dataNumericals: [],
     dataNumChild: [],
-    dataNumZ: []
+    dataNumZ: [],
+
+    chartTitle: '',
+    chartBackground: '',
+    itemColor: ''
   },
   mutations: {},
   actions: {},

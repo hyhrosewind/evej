@@ -8,40 +8,10 @@ export default {
   name: 'histogram',
   data() {
     return {
-    }
-  },
-  props: {
-    chart_width: {
-      type: Number,
-      default: 530
-    },
-    chart_height: {
-      type: Number,
-      default: 410
-    },
-    x_data: {
-      type: Array,
-      default: () => {
-        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      }
-    },
-    series_data: {
-      type: Array,
-      default: () => {
-        return [10, 52, 200, 334, 390, 330, 220]
-      }
-    }
-  },
-  mounted () {
-    this.init()
-  },
-  watch: {
-  },
-  methods: {
-    init() {
-      let myChart  = this.$echarts.init(document.getElementById('histogram'))
-      myChart.setOption({
-        color: ['	rgba(0,84,255,.5)'],
+      title_text: this.$store.state.chartTitle,
+      option: {
+        backgroundColor: 'rgba(255,255,255,1)',
+        color: 'rgba(0,84,255,.5)',
         title: {
           text: '柱状图 - 二维数据',
           textStyle: {
@@ -81,8 +51,77 @@ export default {
             barWidth: '60%',
             data: this.series_data
         }
-    ]
-      })
+      ]
+      }
+    }
+  },
+  props: {
+    chart_width: {
+      type: Number,
+      default: 530
+    },
+    chart_height: {
+      type: Number,
+      default: 410
+    },
+    x_data: {
+      type: Array,
+      default: () => {
+        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      }
+    },
+    series_data: {
+      type: Array,
+      default: () => {
+        return [10, 52, 200, 334, 390, 330, 220]
+      }
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  watch: {
+    option: {
+      handler(newVal, oldVal) {
+        if (this.chart) {
+          if (newVal) {
+            this.chart.setOption(newVal)
+          }else{
+            this.chart.setOption(oldVal)
+          }
+        }else{
+          this.init()
+        }
+      },
+      deep: true
+    },
+    title_text(val) {
+      this.option.title.text = val
+    },
+    "$store.state.chartTitle": function(val) {
+      if(val!=this.option.title.text) {
+        this.option.title.text = val
+      }
+    },
+    "$store.state.chartBackground": function(val) {
+      if(val!=this.option.backgroundColor) {
+        this.option.backgroundColor = val
+      }
+    },
+    "$store.state.itemColor": function(val) {
+      if(val!=this.option.color) {
+        this.option.color = val
+      }
+    }
+  },
+  methods: {
+    init() {
+      let myChart  = this.$echarts.init(document.getElementById('histogram'))
+      myChart.clear()
+      this.$store.state.chartTitle = this.option.title.text
+      this.$store.state.chartBackground = this.option.backgroundColor
+      this.$store.state.itemColor = this.option.color
+      myChart.setOption(this.option)
     }
   }
 }

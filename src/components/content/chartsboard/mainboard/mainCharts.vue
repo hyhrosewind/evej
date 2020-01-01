@@ -1,17 +1,17 @@
 <template>
   <div class="main-charts" 
   :style="{backgroundImage: backgroundImg}">
-    <histogram v-if="histogramFlag"
+    <histogram v-if="chartsFlag.histogramFlag"
     :x_data="this.$store.state.dataDimensions"
     :series_data="this.$store.state.dataNumericals"/>
-    <lineGraph v-if="lineFlag"
+    <lineGraph v-if="chartsFlag.lineFlag"
     :x_data="this.$store.state.dataDimensions"
     :series_data="this.$store.state.dataNumericals"/>
-    <pieGraph v-if="pieFlag"
+    <pieGraph v-if="chartsFlag.pieFlag"
     :pie_data="this.$store.state.pieData"/>
-    <funnelGraph v-if="funnelFlag"
+    <funnelGraph v-if="chartsFlag.funnelFlag"
     :funnel_data="this.$store.state.funnelData"/>
-     <scatter v-if="scatterFlag"
+     <scatter v-if="chartsFlag.scatterFlag"
     :scatter_data="this.$store.state.scatterData"/>
   </div>
 </template>
@@ -27,18 +27,22 @@ export default {
   name: 'mainCharts',
   data() {
     return {
-      histogramFlag: false,
-      lineFlag: false,
-      pieFlag: false,
-      funnelFlag: false,
-      scatterFlag: false,
-      backgroundImg: `url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`
+      backgroundImg: `url(${require('../../../../assets/img/chartanalysis/charts-search.png')})`,
+      chartsFlag: {"histogramFlag":false,"lineFlag": false,
+      "pieFlag": false,"funnelFlag": false,"scatterFlag": false}
     }
   },
   props: {
     drawFlag: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    comFlag() {
+      for(let a in this.chartsFlag) {
+        this.chartsFlag[a] = false
+      }
     }
   },
   watch: {
@@ -71,18 +75,12 @@ export default {
         }
 
         if(val=='histogram'){
-          this.scatterFlag = false
-          this.pieFlag = false 
-          this.lineFlag = false
-          this.funnelFlag = false
-          this.histogramFlag = true
+          this.comFlag()
+          this.chartsFlag.histogramFlag = true
         }
         else if(val=='line'){
-          this.scatterFlag = false
-          this.pieFlag = false
-          this.histogramFlag = false
-          this.funnelFlag = false
-          this.lineFlag = true
+          this.comFlag()
+          this.chartsFlag.lineFlag = true
         }
         else if(val=='pie'){
           this.$store.state.pieData.splice(0, this.$store.state.pieData.length)
@@ -98,11 +96,8 @@ export default {
               }
             }
           }
-          this.scatterFlag = false
-          this.histogramFlag = false
-          this.lineFlag = false
-          this.funnelFlag = false
-          this.pieFlag = true
+          this.comFlag()
+          this.chartsFlag.pieFlag = true
         }
         else if(val=='funnel'){
           this.$store.state.funnelData.splice(0, this.$store.state.funnelData.length)
@@ -118,11 +113,8 @@ export default {
               }
             }
           }
-          this.scatterFlag = false
-          this.histogramFlag = false
-          this.lineFlag = false
-          this.pieFlag = false
-          this.funnelFlag = true
+          this.comFlag()
+          this.chartsFlag.funnelFlag = true
         }
         else if(val=='scatter'){
           this.$store.state.scatterData.splice(0, this.$store.state.scatterData.length)
@@ -133,11 +125,8 @@ export default {
             s[2] = this.$store.state.dataNumZ[a]
             this.$store.state.scatterData.push(s)
           }
-          this.pieFlag = false
-          this.histogramFlag = false
-          this.funnelFlag = false
-          this.lineFlag = false
-          this.scatterFlag = true
+          this.comFlag()
+          this.chartsFlag.scatterFlag = true
         }
         this.$emit('clearTags')
       }

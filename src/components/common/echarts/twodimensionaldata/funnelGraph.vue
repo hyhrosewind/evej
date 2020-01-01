@@ -7,36 +7,9 @@
 
 export default {
   name: 'funnelGraph',
-  props: {
-    chart_width: {
-      type: Number,
-      default: 520
-    },
-    chart_height: {
-      type: Number,
-      default: 470
-    },
-    funnel_data: {
-      type: Array,
-      default: () => {
-        return [
-          {value: 60, name: '访问'},
-          {value: 40, name: '咨询'},
-          {value: 20, name: '订单'},
-          {value: 80, name: '点击'},
-          {value: 100, name: '展现'}
-        ]
-      }
-    }
-  },
-  mounted () {
-    this.drawLine()
-  },
-  methods: {
-    drawLine () {
-      let myChart = this.$echarts.init(document.getElementById('funnelGraph'))
-      
-      myChart.setOption({
+  data() {
+    return {
+      option: {
         title: {
           text: '漏斗图 - 二维数据',
           left: 'center',
@@ -96,7 +69,55 @@ export default {
             data: this.funnel_data
         }
       ]
-      });
+      }
+    }
+  },
+  props: {
+    chart_width: {
+      type: Number,
+      default: 520
+    },
+    chart_height: {
+      type: Number,
+      default: 470
+    },
+    funnel_data: {
+      type: Array,
+      default: () => {
+        return [
+          {value: 60, name: '访问'},
+          {value: 40, name: '咨询'},
+          {value: 20, name: '订单'},
+          {value: 80, name: '点击'},
+          {value: 100, name: '展现'}
+        ]
+      }
+    }
+  },
+  watch: {
+    option: {
+      handler(newVal, oldVal) {
+        if (this.chart) {
+          if (newVal) {
+            this.chart.setOption(newVal)
+          }else{
+            this.chart.setOption(oldVal)
+          }
+          }else{
+            this.init()
+        }
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  methods: {
+    init () {
+      let myChart = this.$echarts.init(document.getElementById('funnelGraph'))
+      myChart.clear()
+      myChart.setOption(this.option)
     }
   }
 }

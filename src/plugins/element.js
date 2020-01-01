@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {Container,Header,Aside,Main,RadioGroup,RadioButton,Menu,Submenu,
   MenuItem,Tooltip,Dropdown,DropdownMenu,DropdownItem,Row,Col,PageHeader,
   Button,Dialog,Upload,Message,MessageBox,Table,TableColumn,Popover,Tag,
-  Select,Option,Tabs,TabPane,Tree} from 'element-ui'
+  Select,Option,Tabs,TabPane,Checkbox,Input,ColorPicker} from 'element-ui'
 
 Vue.use(Container)
 Vue.use(Header)
@@ -31,7 +31,9 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Tabs)
 Vue.use(TabPane)
-Vue.use(Tree)
+Vue.use(Checkbox)
+Vue.use(Input)
+Vue.use(ColorPicker)
 
 Vue.component(Message)
 Vue.component(MessageBox)
