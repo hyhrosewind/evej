@@ -19,16 +19,16 @@
                 <el-color-picker v-model="cbackground" show-alpha size="mini"></el-color-picker>
               </div>
             </tr>
-            <tr style="height: 35px; ">
+            <tr style="height: 37px; ">
               <div :style="{marginLeft: '24px',background: cbackground,borderRadius: '5px'}">{{cbackground}}</div>
             </tr>
-            <tr style="height: 35px;">
+            <tr style="height: 37px;">
               <div style="margin-left: 24px; position: absolute;">调色盘</div>
               <div style="position: absolute; margin-left: 68px; margin-top: -6px; ">
                 <el-color-picker v-model="itemColor" show-alpha size="mini"></el-color-picker>
               </div>
             </tr>
-            <tr style="height: 30px; ">
+            <tr style="height: 20px; ">
               <div :style="{marginLeft: '24px',background: itemColor,borderRadius: '5px'}">{{itemColor}}</div>
             </tr>
           </div>
@@ -47,7 +47,7 @@ export default {
   name: 'setStyle',
   data() {
     return {
-      showTitle: true,
+      showTitle: false,
       inputTitle: '',
       tempTitle: '',
       cbackground: '',
@@ -57,27 +57,20 @@ export default {
     }
   },
   watch: {
-    "$store.state.chartTitle": function(val) {
-      this.inputTitle = val
-    },
-    "$store.state.chartBackground": function(val) {
-      if(this.cbackground=='') {
-        this.cbackground = val
-        this.tempBackground = val
-      }
-    },
-    "$store.state.itemColor": function(val) {
-      if(this.itemColor=='') {
-        this.itemColor = val
-        this.tempItem = val
-      }
+    "$store.state.changeFlag": function(val) {
+      if(val == 'histogram' || val == 'line' || val == 'scatter')
+      this.inputTitle = this.tempTitle = this.$store.state.chartTitle
+      this.showTitle = true
+      this.cbackground = this.tempBackground = this.$store.state.chartBackground
+      this.itemColor = this.tempItem = this.$store.state.itemColor
     },
     showTitle(val) {
       if(val == false) {
-        this.tempTitle = this.$store.state.chartTitle
         this.$store.state.chartTitle = ''
       }
-      else this.$store.state.chartTitle = this.tempTitle
+      else if(this.tempTitle!='') {
+        this.$store.state.chartTitle = this.tempTitle
+      }
     },
     cbackground(val) {
       if(val!=this.tempBackground) {

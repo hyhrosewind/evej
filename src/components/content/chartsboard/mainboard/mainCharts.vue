@@ -56,6 +56,7 @@ export default {
         this.$store.state.dataNumericals.splice(0, this.$store.state.dataNumericals.length)
         this.$store.state.dataNumChild.splice(0, this.$store.state.dataNumChild.length)
         this.$store.state.dataNumZ.splice(0, this.$store.state.dataNumZ.length)
+        this.$store.state.changeFlag = ''
         let sheet = this.$store.state.selectedSheet
         for(let a in sheet) {
           for(let x in sheet[a]){
@@ -77,10 +78,12 @@ export default {
         if(val=='histogram'){
           this.comFlag()
           this.chartsFlag.histogramFlag = true
+          this.$store.state.changeFlag = 'histogram'
         }
         else if(val=='line'){
           this.comFlag()
           this.chartsFlag.lineFlag = true
+          this.$store.state.changeFlag = 'line'
         }
         else if(val=='pie'){
           this.$store.state.pieData.splice(0, this.$store.state.pieData.length)
@@ -127,6 +130,7 @@ export default {
           }
           this.comFlag()
           this.chartsFlag.scatterFlag = true
+          this.$store.state.changeFlag = 'scatter'
         }
         this.$emit('clearTags')
       }

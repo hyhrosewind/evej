@@ -11,6 +11,8 @@ export default {
   data() {
     return {
       option: {
+        color: 'rgba(0,84,255,.5)',
+        backgroundColor: 'rgba(255,255,255,1)',
         title: {
           text: '3D散点图 - 三维数据',
           textStyle: {
@@ -73,6 +75,21 @@ export default {
         }
       },
       deep: true
+    },
+    "$store.state.chartTitle": function(val) {
+      if(val!=this.option.title.text) {
+        this.option.title.text = val
+      }
+    },
+    "$store.state.chartBackground": function(val) {
+      if(val!=this.option.backgroundColor) {
+        this.option.backgroundColor = val
+      }
+    },
+    "$store.state.itemColor": function(val) {
+      if(val!=this.option.color) {
+        this.option.color = val
+      }
     }
   },
   mounted () {
@@ -82,6 +99,9 @@ export default {
     init () {
       let myChart = this.$echarts.init(document.getElementById('scatter'))
       myChart.clear()
+      this.$store.state.chartTitle = this.option.title.text
+      this.$store.state.chartBackground = this.option.backgroundColor
+      this.$store.state.itemColor = this.option.color
       myChart.setOption(this.option)
     }
   }

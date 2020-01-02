@@ -25,6 +25,7 @@ const store = new Vuex.Store({
     dataNumChild: [],
     dataNumZ: [],
 
+    changeFlag: '',
     chartTitle: '',
     chartBackground: '',
     itemColor: ''

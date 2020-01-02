@@ -10,13 +10,14 @@ export default {
   data() {
     return {
       option: {
+        backgroundColor: 'rgba(255,255,255,1)',
         title: {
           text: '折线图 - 二维数据',
           textStyle: {
             fontSize: 14
           }
         },
-        color: ['	rgba(0,84,255,.5)'],
+        color: 'rgba(0,84,255,.5)',
     xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -69,6 +70,21 @@ export default {
         }
       },
       deep: true
+    },
+    "$store.state.chartTitle": function(val) {
+      if(val!=this.option.title.text) {
+        this.option.title.text = val
+      }
+    },
+    "$store.state.chartBackground": function(val) {
+      if(val!=this.option.backgroundColor) {
+        this.option.backgroundColor = val
+      }
+    },
+    "$store.state.itemColor": function(val) {
+      if(val!=this.option.color) {
+        this.option.color = val
+      }
     }
   },
   mounted () {
@@ -78,6 +94,9 @@ export default {
     init () {
       let myChart = this.$echarts.init(document.getElementById('lineGraph'))
       myChart.clear()
+      this.$store.state.chartTitle = this.option.title.text
+      this.$store.state.chartBackground = this.option.backgroundColor
+      this.$store.state.itemColor = this.option.color
       myChart.setOption(this.option)
     }
   }
