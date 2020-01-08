@@ -4,7 +4,7 @@
     <div class="analysisInfo">
       <chartsBoard v-if="chartFlag" @chartVisible="chartBoardShow"/>
       <txtChartsBoard v-if="txtChartFlag" @changeTxtVisible="txtChartBoardShow"/>
-      <createCharts @chartShow="chartBoardShow" @txtChartsShow="txtChartBoardShow"/>
+      <createCharts @chartShow="init_chartBoardShow" @txtChartsShow="txtChartBoardShow"/>
       <chartTable/>
     </div>
   </div>
@@ -28,6 +28,20 @@ export default {
   },
   methods: {
     chartBoardShow(chartFlag) {
+      new Promise(resolve => {
+        setTimeout(() => {
+          resolve('loading')
+        },1500)
+      }).then(res => {
+        this.chartFlag = chartFlag
+        this.$store.state.changeFlag = '',
+        this.$store.state.chartTitle = '',
+        this.$store.state.chartBackground = ''
+        this.$store.state.itemColor = ''        
+        this.$store.state.changeOption = false 
+      })
+    },
+    init_chartBoardShow(chartFlag) {
       this.chartFlag = chartFlag
     },
     txtChartBoardShow(txtChartFlag) {

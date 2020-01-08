@@ -10,6 +10,7 @@ export default {
   data() {
     return {
       option: {
+        label: 'lineGraph',
         backgroundColor: 'rgba(255,255,255,1)',
         title: {
           text: '折线图 - 二维数据',
@@ -54,6 +55,12 @@ export default {
       default: () => {
         return [820, 932, 901, 934, 1290, 1330, 1320]
       }
+    },
+    changeOption: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   watch: {
@@ -85,6 +92,12 @@ export default {
       if(val!=this.option.color) {
         this.option.color = val
       }
+    },
+    "$store.state.saveDataFlag": function(val) {
+      if(val==true) {
+        this.$store.state.saveChartsData.push(this.option)
+      }
+      this.$store.state.saveDataFlag = false
     }
   },
   mounted () {
@@ -97,6 +110,9 @@ export default {
       this.$store.state.chartTitle = this.option.title.text
       this.$store.state.chartBackground = this.option.backgroundColor
       this.$store.state.itemColor = this.option.color
+      if(JSON.stringify(this.changeOption)!='{}'&&this.$store.state.changeOption==false) {
+          this.option = this.changeOption
+        }
       myChart.setOption(this.option)
     }
   }

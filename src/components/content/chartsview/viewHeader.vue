@@ -1,7 +1,7 @@
 <template>
-  <div class="charts_header">
+  <div class="view_header">
     <div class="charts_title">
-      <span>图表</span>
+      <span>新看板</span>
     </div>
     <div class="charts_edit">
       <el-button type="primary" icon="el-icon-edit" size="mini" circle></el-button>
@@ -16,7 +16,7 @@
 <script>
 
 export default {
-  name: 'chartsHeader',
+  name: 'viewHeader',
   data() {
     return {
       chart_show: false
@@ -24,19 +24,10 @@ export default {
   },
   methods: {
     saveCharts() {
-      if(this.$store.state.txtFlag==false) {
-        this.$store.state.saveDataFlag = true
-        this.$emit("chartsShowHeader",this.chart_show)
-      }else{
-        this.$emit("txtChartsShowHeader",this.chart_show)
-      }
+      this.$emit("deliveryShow")
     },
     cancelEdit() {
-      if(this.$store.state.txtFlag==false) {
-        this.$emit("chartsShowHeader",this.chart_show)
-      }else{
-        this.$emit("txtChartsShowHeader",this.chart_show)
-      }
+      this.$emit("deliveryShow")
     }
   },
   components: {
@@ -46,7 +37,7 @@ export default {
 
 <style scoped>
 
-.charts_header {
+.view_header {
   padding: 0px;
   margin: 0px;
   height: 60px;
@@ -61,7 +52,7 @@ export default {
 
 .charts_edit {
   position: absolute;
-  margin-left: 60px;
+  margin-left: 70px;
   margin-top: 12px;
 }
 

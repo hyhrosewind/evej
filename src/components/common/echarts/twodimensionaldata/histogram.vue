@@ -8,8 +8,22 @@ export default {
   name: 'histogram',
   data() {
     return {
+      myChart: '',
       title_text: this.$store.state.chartTitle,
       option: {
+        label: 'histogram',
+        toolbox: {
+          show: true,
+          feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {
+              show:true,
+              excludeComponents : ['toolbox'],
+              pixelRatio: 2
+            }
+          }
+        },
         backgroundColor: 'rgba(255,255,255,1)',
         color: 'rgba(0,84,255,.5)',
         title: {
@@ -75,6 +89,12 @@ export default {
       default: () => {
         return [10, 52, 200, 334, 390, 330, 220]
       }
+    },
+    changeOption: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   mounted () {
@@ -112,17 +132,31 @@ export default {
       if(val!=this.option.color) {
         this.option.color = val
       }
+    },
+    "$store.state.saveDataFlag": function(val) {
+      if(val==true) {
+        this.$store.state.saveChartsData.push(this.option)
+      }
+      this.$store.state.saveDataFlag = false
+    },
+    "$store.state.showFlag": function(val) {
+      if(val=='histogram'){
+        this.option = this.$store.state.selectedPreview
+      }
     }
   },
   methods: {
     init() {
-      let myChart  = this.$echarts.init(document.getElementById('histogram'))
-      myChart.clear()
-      this.$store.state.chartTitle = this.option.title.text
-      this.$store.state.chartBackground = this.option.backgroundColor
-      this.$store.state.itemColor = this.option.color
-      myChart.setOption(this.option)
-    }
+        this.myChart = this.$echarts.init(document.getElementById('histogram'))
+        this.myChart.clear()
+        this.$store.state.chartTitle = this.option.title.text
+        this.$store.state.chartBackground = this.option.backgroundColor
+        this.$store.state.itemColor = this.option.color
+        if(JSON.stringify(this.changeOption)!='{}'&&this.$store.state.changeOption==false) {
+          this.option = this.changeOption
+        }
+        this.myChart.setOption(this.option)
+      }
   }
 }
 </script>

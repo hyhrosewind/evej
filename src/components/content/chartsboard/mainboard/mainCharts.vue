@@ -57,6 +57,7 @@ export default {
         this.$store.state.dataNumChild.splice(0, this.$store.state.dataNumChild.length)
         this.$store.state.dataNumZ.splice(0, this.$store.state.dataNumZ.length)
         this.$store.state.changeFlag = ''
+        this.$store.state.saveImageFlag = false
         let sheet = this.$store.state.selectedSheet
         for(let a in sheet) {
           for(let x in sheet[a]){
@@ -77,6 +78,7 @@ export default {
 
         if(val=='histogram'){
           this.comFlag()
+          this.$store.state.changeOption = true
           this.chartsFlag.histogramFlag = true
           this.$store.state.changeFlag = 'histogram'
         }

@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-table
-    :data="this.$store.state.saveChartsData"
+    :data="this.$store.state.viewChartsBoard"
     style="width: 90%">
     <el-table-column
-      label="图表名称"
+      label="看板名称"
       width="210">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
-          <p>图表： {{ scope.row.title.text }}</p>
+          <p>看板： {{ scope.row.title.text }}</p>
           <div slot="reference" class="name-wrapper">
             <el-tag size="medium">{{ scope.row.title.text  }}</el-tag>
           </div>
@@ -43,15 +43,13 @@
       </template>
     </el-table-column>
   </el-table>
-  <previewChart :showFlag="chartShow" @changeFlag="handleShow"/>
   </div>
 </template>
 
 <script>
-import previewChart from 'components/content/createcharts/previewChart'
 
 export default {
-  name: 'chartTable',
+  name: 'viewTable',
   data() {
     return {
       chartShow: false
@@ -64,13 +62,9 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row)
-    },
-    handleShow(val) {
-      this.chartShow = val
     }
   },
   components: {
-    previewChart
   }
 }
 </script>

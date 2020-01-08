@@ -28,7 +28,16 @@ const store = new Vuex.Store({
     changeFlag: '',
     chartTitle: '',
     chartBackground: '',
-    itemColor: ''
+    itemColor: '',
+    changeOption: Boolean,
+
+    saveDataFlag: Boolean,
+    saveChartsData: [],
+    chartsTitle: [],
+    selectedPreview: '',
+
+    viewChartsBoard: [],
+    selectCharts: []
   },
   mutations: {},
   actions: {},

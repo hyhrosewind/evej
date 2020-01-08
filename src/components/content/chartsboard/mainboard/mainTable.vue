@@ -40,7 +40,7 @@
       <tr class="table-tr"><td class="table-td">分类</td>
         <td class="dimension">
           <draggable v-model="dimensionTags" :group="{name: 'dimensions'}" 
-          @add="addDimension" draggable="false"
+          @add="addDimension" @remove="deleteTags" draggable="false"
            style="height: 28px; text-align: left; padding: 2px; margin-left: 12px; ">
             <div v-for="index in dimensionTags" :key="index" style="width: 90px; ">
               <div>{{index}}</div>
@@ -108,47 +108,49 @@ export default {
   },
   methods: {
     addDimension(evt) {
-      if(this.$store.state.selectedDimensions!=''){
-        this.$store.state.selectedDimensions.splice(0, this.$store.state.selectedDimensions.length)
-      }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- dimension ---- ',evt.item.innerText)
       this.$store.state.selectedDimensions[0]=evt.item.innerText
     },
     addNumerical(evt) {
-      if(this.$store.state.selectedNumericals!=''){
-        this.$store.state.selectedNumericals.splice(0, this.$store.state.selectedNumericals.length)
-      }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumericals[0]=evt.item.innerText
     },
     addNumChild(evt) {
-      if(this.$store.state.selectedNumChild!=''){
-        this.$store.state.selectedNumChild.splice(0, this.$store.state.selectedNumChild.length)
-      }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumChild[0]=evt.item.innerText
     },
     addNumZ(evt) {
-    if(this.$store.state.selectedNumZ!=''){
-        this.$store.state.selectedNumZ.splice(0, this.$store.state.selectedNumZ.length)
-      }
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumZ[0]=evt.item.innerText
     },
     drawCharts(chartLabel) {
-      if(this.$store.state.selectedDimensions!=''&&this.$store.state.selectedNumericals!=''){
+      if((this.$store.state.selectedDimensions!='')&&(this.$store.state.selectedNumericals.length!='')
+      &&(chartLabel!='scatter')) {
         this.$emit('uploadCharts',chartLabel)
-        console.log(chartLabel)
       }
-      else if(this.$store.state.selectedNumericals!=''&&
-      this.$store.state.selectedNumChild!=''&&this.$store.state.selectNumZ!='') {
+      else if((this.$store.state.selectedNumericals!='')&&(
+      this.$store.state.selectedNumChild!='')&&(this.$store.state.selectNumZ!='')) {
         this.$emit('uploadCharts',chartLabel)
-        console.log(chartLabel)
       }  
+    },
+    deleteTags() {
+      if(this.$store.state.selectedDimensions!=''){
+        this.$store.state.selectedDimensions.splice(0, this.$store.state.selectedDimensions.length)
+        console.log(this.$store.state.selectedDimensions)
+      }
+      else if(this.$store.state.selectedNumericals!=''){
+        this.$store.state.selectedNumericals.splice(0, this.$store.state.selectedNumericals.length)
+      }
+      else if(this.$store.state.selectedNumChild!=''){
+        this.$store.state.selectedNumChild.splice(0, this.$store.state.selectedNumChild.length)
+      }
+      else if(this.$store.state.selectedNumZ!=''){
+        this.$store.state.selectedNumZ.splice(0, this.$store.state.selectedNumZ.length)
+      }
     }
   },
   components: {

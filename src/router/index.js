@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '/Overview',
-    name: '首页概览',
+    name: '新建看板',
     component: Overview,
   },
   {
