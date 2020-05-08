@@ -4,32 +4,24 @@
 </template>
 
 <script>
+  import echarts from "echarts";
 export default {
   name: 'histogram',
   data() {
     return {
-      myChart: '',
+      radiuss: 10,
       title_text: this.$store.state.chartTitle,
       option: {
-        label: 'histogram',
-        toolbox: {
-          show: true,
-          feature: {
-            dataView: {readOnly: false},
-            restore: {},
-            saveAsImage: {
-              show:true,
-              excludeComponents : ['toolbox'],
-              pixelRatio: 2
-            }
-          }
-        },
         backgroundColor: 'rgba(255,255,255,1)',
         color: 'rgba(0,84,255,.5)',
         title: {
           text: '柱状图 - 二维数据',
+          x: 'left',
+          y: 'top',
           textStyle: {
-            fontSize: 14
+            fontFamily: 'Courier New',
+            fontSize: 20,
+            color: '#000000',
           }
         },
     tooltip : {
@@ -50,12 +42,20 @@ export default {
             data : this.x_data,
             axisTick: {
               alignWithLabel: true
-            }
+            },
+          axisLabel: {
+            color: '#000000', // 刻度标签
+            fontSize: 10
+          },
         }
     ],
     yAxis : [
         {
-            type : 'value'
+            type : 'value',
+            axisLabel: {
+              color: '#000000', // 刻度标签
+              fontSize: 10
+            },
         }
     ],
     series : [
@@ -63,8 +63,13 @@ export default {
             name:'直接访问',
             type:'bar',
             barWidth: '60%',
-            data: this.series_data
-        }
+            data: this.series_data,
+            itemStyle: {
+              barBorderRadius: 0
+            }
+
+        },
+
       ]
       }
     }
@@ -90,15 +95,10 @@ export default {
         return [10, 52, 200, 334, 390, 330, 220]
       }
     },
-    changeOption: {
-      type: Object,
-      default: () => {
-        return {}
-      }
-    }
   },
   mounted () {
     this.init()
+    this.radiuss=10
   },
   watch: {
     option: {
@@ -133,30 +133,52 @@ export default {
         this.option.color = val
       }
     },
-    "$store.state.saveDataFlag": function(val) {
-      if(val==true) {
-        this.$store.state.saveChartsData.push(this.option)
-      }
-      this.$store.state.saveDataFlag = false
+    "$store.state.titleAcross": function(newval, oldval){  //标题横向位置///////////////////////////// 增
+      this.option.title.x=newval
+      console.log('.....histogram标题横向位置位置:' + newval)
     },
-    "$store.state.showFlag": function(val) {
-      if(val=='histogram'){
-        this.option = this.$store.state.selectedPreview
-      }
+    "$store.state.titleVertical": function (newval,oldval) {   //标题横向位置///////////////////////// 增
+      this.option.title.y=newval
+      console.log('...histogram标题纵向位置：' + newval)
+    },
+    "$store.state.wordFamily": function (newval,oldval) {
+      this.option.title.textStyle.fontFamily=newval
+      console.log('...histogram标题字体类别：' + newval)
+    },
+    "$store.state.titleColor":function (newval,oldval) {
+      this.option.title.textStyle.color=newval
+      console.log("....histogram标题字体颜色："+ newval)
+    },
+    "$store.state.wordSize": function (newval,oldval) {
+      this.option.title.textStyle.fontSize=newval
+      console.log('...histogram标题大小' + newval)
+    },
+   "$store.state.rad": function (newval,oldval) {
+    console.log('...histogram圆角' + newval)
+     this.option.series[0].itemStyle.barBorderRadius= newval
+    },
+    "$store.state.tableColor": function (newval,oldval) {
+      console.log('...histogram刻度标签颜色' + newval)
+      this.option.xAxis[0].axisLabel.color= newval
+      this.option.yAxis[0].axisLabel.color= newval
+    },
+    "$store.state.tableSi": function (newval,oldval) {
+      console.log('...histogram刻度标签大小' + newval)
+      this.option.xAxis[0].axisLabel. fontSize= newval
+      this.option.yAxis[0].axisLabel. fontSize= newval
     }
+
+
   },
   methods: {
     init() {
-        this.myChart = this.$echarts.init(document.getElementById('histogram'))
-        this.myChart.clear()
-        this.$store.state.chartTitle = this.option.title.text
-        this.$store.state.chartBackground = this.option.backgroundColor
-        this.$store.state.itemColor = this.option.color
-        if(JSON.stringify(this.changeOption)!='{}'&&this.$store.state.changeOption==false) {
-          this.option = this.changeOption
-        }
-        this.myChart.setOption(this.option)
-      }
+      let myChart  = this.$echarts.init(document.getElementById('histogram'))
+      myChart.clear()
+      this.$store.state.chartTitle = this.option.title.text
+      this.$store.state.chartBackground = this.option.backgroundColor
+      this.$store.state.itemColor = this.option.color
+      myChart.setOption(this.option)
+    }
   }
 }
 </script>

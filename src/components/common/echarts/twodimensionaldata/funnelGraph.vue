@@ -14,8 +14,12 @@ export default {
           text: '漏斗图 - 二维数据',
           left: 'center',
           top: 20,
+          x: 'left',
+          y: 'top',
           textStyle: {
-            fontSize: 14
+            fontFamily: 'Courier New',
+            fontSize: 20,
+            color: '#000000',
           }
         },
         tooltip: {
@@ -108,7 +112,27 @@ export default {
         }
       },
       deep: true
-    }
+    },
+    "$store.state.titleAcross": function(newval, oldval){  //标题横向位置///////////////////////////// 增
+      this.option.title.x=newval
+      console.log('.....histogram标题横向位置位置:' + newval)
+    },
+    "$store.state.titleVertical": function (newval,oldval) {   //标题横向位置///////////////////////// 增
+      this.option.title.y=newval
+      console.log('...histogram标题纵向位置：' + newval)
+    },
+    "$store.state.wordFamily": function (newval,oldval) {
+      this.option.title.textStyle.fontFamily=newval
+      console.log('...histogram标题字体类别：' + newval)
+    },
+    "$store.state.titleColor":function (newval,oldval) {
+      this.option.title.textStyle.color=newval
+      console.log("....histogram标题字体颜色："+ newval)
+    },
+    "$store.state.wordSize": function (newval,oldval) {
+      this.option.title.textStyle.fontSize=newval
+      console.log('...histogram标题大小' + newval)
+    },
   },
   mounted () {
     this.init()

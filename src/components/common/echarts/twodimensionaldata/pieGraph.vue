@@ -12,10 +12,12 @@ export default {
       option: {
     title: {
         text: '饼图 - 二维数据',
-        left: 'center',
-        top: 20,
+        x: 'left',
+        y: 'top',
         textStyle: {
-            fontSize: 14
+          fontFamily: 'Courier New',
+          fontSize: 20,
+          color: '#000000',
         }
     },
     tooltip : {
@@ -26,9 +28,9 @@ export default {
         {
             name:'访问来源',
             type:'pie',
-            color: [          
-                        'rgba(0,84,255,.5)', 'rgba(0,84,253,.6)', 
-                        'rgba(0,84,245,.3)', 'rgba(0,84,252,.22)', 
+            color: [
+                        'rgba(0,84,255,.5)', 'rgba(0,84,253,.6)',
+                        'rgba(0,84,245,.3)', 'rgba(0,84,252,.22)',
                         'rgba(0,84,246,.4)', 'rgba(0,84,251,.7)',
                         'rgba(0,84,250,.4)', 'rgba(0,84,249,.8)',
                         'rgba(0,84,247,.44)', 'rgba(0,84,248,.26)'
@@ -100,7 +102,27 @@ export default {
         }
       },
       deep: true
-    }
+    },
+    "$store.state.titleAcross": function(newval, oldval){  //标题横向位置///////////////////////////// 增
+      this.option.title.x=newval
+      console.log('.....line标题横向位置位置:' + newval)
+    },
+    "$store.state.titleVertical": function (newval,oldval) {   //标题横向位置///////////////////////// 增
+      this.option.title.y=newval
+      console.log('...line标题纵向位置：' + newval)
+    },
+    "$store.state.wordFamily": function (newval,oldval) {
+      this.option.title.textStyle.fontFamily=newval
+      console.log('...line标题字体类别：' + newval)
+    },
+    "$store.state.titleColor":function (newval,oldval) {
+      this.option.title.textStyle.color=newval
+      console.log("....line标题字体颜色："+ newval)
+    },
+    "$store.state.wordSize": function (newval,oldval) {
+      this.option.title.textStyle.fontSize=newval
+      console.log('...line标题大小' + newval)
+    },
   },
   mounted () {
     this.init()

@@ -10,22 +10,33 @@ export default {
   data() {
     return {
       option: {
-        label: 'lineGraph',
         backgroundColor: 'rgba(255,255,255,1)',
+        color: 'rgba(0,84,255,.5)',
         title: {
           text: '折线图 - 二维数据',
+          x: 'left',  //标题横向位置//////////////////////////////////// 增
+          y: 'top',   //标题纵向位置//////////////////////////////////// 增
           textStyle: {
-            fontSize: 14
+            fontFamily: 'Courier New',
+            fontSize: 20,
+            color: '#000000',
           }
         },
-        color: 'rgba(0,84,255,.5)',
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: this.x_data
+        data: this.x_data,
+        axisLabel: {
+        color: '#000000', // 刻度标签
+        fontSize: 10
+      },
     },
     yAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+          color: '#000000', // 刻度标签
+          fontSize: 10
+        },
     },
     series: [{
         data: this.series_data,
@@ -38,11 +49,11 @@ export default {
   props: {
     chart_width: {
       type: Number,
-      default: 530
+      default: 520
     },
     chart_height: {
       type: Number,
-      default: 410
+      default: 470
     },
     x_data: {
       type: Array,
@@ -54,12 +65,6 @@ export default {
       type: Array,
       default: () => {
         return [820, 932, 901, 934, 1290, 1330, 1320]
-      }
-    },
-    changeOption: {
-      type: Object,
-      default: () => {
-        return {}
       }
     }
   },
@@ -93,11 +98,35 @@ export default {
         this.option.color = val
       }
     },
-    "$store.state.saveDataFlag": function(val) {
-      if(val==true) {
-        this.$store.state.saveChartsData.push(this.option)
-      }
-      this.$store.state.saveDataFlag = false
+    "$store.state.titleAcross": function(newval, oldval){  //标题横向位置///////////////////////////// 增
+      this.option.title.x=newval
+      console.log('.....line标题横向位置位置:' + newval)
+    },
+    "$store.state.titleVertical": function (newval,oldval) {   //标题横向位置///////////////////////// 增
+      this.option.title.y=newval
+      console.log('...line标题纵向位置：' + newval)
+    },
+    "$store.state.wordFamily": function (newval,oldval) {
+      this.option.title.textStyle.fontFamily=newval
+      console.log('...line标题字体类别：' + newval)
+    },
+    "$store.state.titleColor":function (newval,oldval) {
+      this.option.title.textStyle.color=newval
+      console.log("....line标题字体颜色："+ newval)
+    },
+    "$store.state.wordSize": function (newval,oldval) {
+      this.option.title.textStyle.fontSize=newval
+      console.log('...line标题大小' + newval)
+    },
+    "$store.state.tableColor": function (newval,oldval) {
+      console.log('...line刻度标签颜色' + newval)
+      this.option.xAxis.axisLabel.color= newval
+      this.option.yAxis.axisLabel.color= newval
+    },
+    "$store.state.tableSi": function (newval,oldval) {
+      console.log('...line刻度标签大小' + newval)
+      this.option.xAxis.axisLabel. fontSize= newval
+      this.option.yAxis.axisLabel. fontSize= newval
     }
   },
   mounted () {
@@ -110,9 +139,6 @@ export default {
       this.$store.state.chartTitle = this.option.title.text
       this.$store.state.chartBackground = this.option.backgroundColor
       this.$store.state.itemColor = this.option.color
-      if(JSON.stringify(this.changeOption)!='{}'&&this.$store.state.changeOption==false) {
-          this.option = this.changeOption
-        }
       myChart.setOption(this.option)
     }
   }
