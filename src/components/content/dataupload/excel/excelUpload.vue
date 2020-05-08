@@ -106,7 +106,7 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message({
-        message: `数据文件限制为1, 您选择了 ${files.length} 个数据文件, 
+        message: `数据文件限制为1, 您选择了 ${files.length} 个数据文件,
         共计 ${files.length + fileList.length} 个文件`,type: 'warning'})
     }
   },
@@ -122,3 +122,9 @@ export default {
 }
 
 </style>
+
+<!--数据集上传excel,txt文件数据上传
+
+store excel数据：
+excelName String: excel文件名
+excelData[]: excel数据--[{sheet[],sheetName},{sheet[],sheetName},...] -->

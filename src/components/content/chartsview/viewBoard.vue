@@ -62,7 +62,6 @@ export default {
   height: 502px;
   padding-top: 10px;
   border-left: 1px solid rgba(62,63,99,.2);
-  border-right: 1px solid rgba(62,63,99,.2);
   border-radius: 10px;
   margin-top: -2px;
 }

@@ -8,9 +8,9 @@
       width="210">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
-          <p>看板： {{ scope.row.title.text }}</p>
+          <p>看板： {{ scope.row }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.title.text  }}</el-tag>
+            <el-tag size="medium">{{ scope.row  }}</el-tag>
           </div>
         </el-popover>
       </template>
@@ -29,8 +29,8 @@
           size="mini" type="primary" plain
           @click="handlePreview(scope.$index, scope.row)"> 
           <img src="../../../assets/img/echarts/table/see.png"
-            style="width: 20px; height: 20px; 
-            position: absolute; margin-left: -10px; margin-top: -10px;"/>
+            style="width: 18px; height: 14px; 
+            position: absolute; margin-left: -10px; margin-top: -7px; "/>
         </el-button>
         <el-button
           class="charts-button"
@@ -43,10 +43,12 @@
       </template>
     </el-table-column>
   </el-table>
+  <previewView :showFlag="chartShow" @changeFlag="handleShow"/>
   </div>
 </template>
 
 <script>
+import previewView from 'components/content/chartsview/previewView'
 
 export default {
   name: 'viewTable',
@@ -58,13 +60,16 @@ export default {
   methods: {
     handlePreview(index,row) {
       this.chartShow = true
-      this.$store.state.selectedPreview = row
     },
     handleDelete(index, row) {
       console.log(index, row)
+    },
+    handleShow(val) {
+      this.chartShow = val
     }
   },
   components: {
+    previewView
   }
 }
 </script>

@@ -29,8 +29,8 @@
           size="mini" type="primary" plain
           @click="handlePreview(scope.$index, scope.row)"> 
           <img src="../../../assets/img/echarts/table/see.png"
-            style="width: 20px; height: 20px; 
-            position: absolute; margin-left: -10px; margin-top: -10px;"/>
+            style="width: 18px; height: 14px; 
+            position: absolute; margin-left: -10px; margin-top: -7px;"/>
         </el-button>
         <el-button
           class="charts-button"

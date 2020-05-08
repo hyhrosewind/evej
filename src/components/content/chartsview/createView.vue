@@ -20,6 +20,12 @@ export default {
   methods: {
     handleView(){
       this.$emit("viewBoardShow",true)
+      if(this.$store.state.chartsTitle!=''){
+        this.$store.state.chartsTitle.splice(0, this.$store.state.chartsTitle.length)
+      }
+      if(this.$store.state.selectCharts!=''){
+        this.$store.state.selectCharts.splice(0, this.$store.state.selectCharts.length)
+      }
       for(let a in this.$store.state.saveChartsData) {
         this.$store.state.chartsTitle.push(this.$store.state.saveChartsData[a].title.text)
       }

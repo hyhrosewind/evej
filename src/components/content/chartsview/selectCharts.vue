@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     handleClose(tag) {
-      this.$store.state.excelDimension.splice(this.$store.state.excelDimension.indexOf(tag), 1);
+      this.$store.state.chartsTitle.splice(this.$store.state.chartsTitle.indexOf(tag), 1)
     }
   },
   components: {

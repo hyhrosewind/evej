@@ -37,7 +37,8 @@ const store = new Vuex.Store({
     selectedPreview: '',
 
     viewChartsBoard: [],
-    selectCharts: []
+    selectCharts: [],
+    viewTitle: ''
   },
   mutations: {},
   actions: {},

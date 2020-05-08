@@ -32,7 +32,12 @@ export default {
   },
   watch: {
     selected(val) {
+      if(this.$store.state.selectedSheet!=''){
+        this.$store.state.selectedSheet.splice(0, this.$store.state.selectedSheet.length)
+      }
       this.$store.state.selectedSheet = val.sheet
+      console.log('store ---- selected sheet数据 --',val.sheet)
+
       if(this.$store.state.excelDimension!=''){
         this.$store.state.excelDimension.splice(0, this.$store.state.excelDimension.length)
       }
@@ -64,3 +69,11 @@ export default {
   margin-top: 5px;
 }
 </style>
+
+<!-- 在excelDataSelected选择单一的数据集，存储被选择的单一数据集中的sheet，维度和数值
+
+excelDataSelected[]: 被选择的excel数据集--[{sheet[],sheetName},{sheet[],sheetName},...]
+selectedSheet[]: 被选择的单一数据集中的sheet--[{先修课:"",学分:"",课程号:"",课程名:""},{},{},{},{},{},{},{},...]
+excelDimension[]: 被选择的单一数据集中的sheet中的维度字符部分--["课程号","课程名","先修课",...]
+excelNumerical[]: 被选择的单一数据集中的sheet中的数值字符部分--["学分",...]
+-->

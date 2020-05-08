@@ -49,10 +49,6 @@
         </td>
       </tr>
 
-      <tr class="table-tr"><td class="table-td">子分类</td>
-        <td class="dimension-child"></td>
-      </tr>  
-
       <tr class="table-tr"><td class="table-td">主值轴</td>
         <td class="numerical">
           <draggable v-model="numericalTags" :group="{name: 'numericals'}" 
@@ -111,21 +107,25 @@ export default {
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- dimension ---- ',evt.item.innerText)
       this.$store.state.selectedDimensions[0]=evt.item.innerText
+      console.log('store selected dimensions',evt.item.innerText)
     },
     addNumerical(evt) {
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumericals[0]=evt.item.innerText
+      console.log('store selected Numericals',evt.item.innerText)
     },
     addNumChild(evt) {
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumChild[0]=evt.item.innerText
+      console.log('store selected Numericals Child',evt.item.innerText)
     },
     addNumZ(evt) {
       evt.item.style.background = `	rgba(0,255,127,.2)`
       console.log('selected ---- numerical ---- ',evt.item.innerText)
       this.$store.state.selectedNumZ[0]=evt.item.innerText
+      console.log('store selected Numericals Z',evt.item.innerText)
     },
     drawCharts(chartLabel) {
       if((this.$store.state.selectedDimensions!='')&&(this.$store.state.selectedNumericals.length!='')
@@ -184,3 +184,11 @@ export default {
   background: rgba(67,64,64,.01);
 }
 </style>
+
+<!-- 存储被拖动过的维度和数值
+
+selectedDimensions[]: 被拖动过的维度-- ["课程号"，...]
+selectedNumericals[]：被拖动过的数值-- ["学分",...]
+selectedNumChild[]：被拖动过的数值 用于 Y 三维-- ["学分",...]
+selectedNumZ[]：被拖动过的数值 用于 Z 三维-- ["学分",...]
+ -->

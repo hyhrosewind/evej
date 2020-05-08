@@ -25,6 +25,7 @@ export default {
   methods: {
     saveCharts() {
       this.$emit("deliveryShow")
+      this.$store.state.viewChartsBoard.push(this.$store.state.viewTitle)
     },
     cancelEdit() {
       this.$emit("deliveryShow")

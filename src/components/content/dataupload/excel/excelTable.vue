@@ -46,6 +46,7 @@ export default {
     handleSelection() {
       this.excelTableVisible = false
       this.$store.state.excelDataSelected = this.$refs.multipleTable.selection
+      console.log('store excel ---- 被选择的数据集 ----',this.$store.state.excelDataSelected)
     },
     excelTableName(i) {
       return this.$store.state.excelData[i].sheetName
@@ -75,3 +76,9 @@ export default {
   margin-top: -25px;
 }
 </style>
+
+<!--excel数据集dialog，完成存储在selectData中所选择的数据集,
+在dataset.dataSetTable.vue中完成所选数据集的table展示
+
+store excel被选择的数据集：
+excelDataSelected[]: 被选择的excel数据集--[{sheet[],sheetName},{sheet[],sheetName},...] -->
